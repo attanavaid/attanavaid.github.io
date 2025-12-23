@@ -2,7 +2,7 @@ import type { WorkExperience } from '@/types';
 
 export const workData: WorkExperience[] = [
     {
-        icon: "/images/work/lp2.png",
+        icon: "/work/lp2.png",
         title: "Learn Prompting Company, INC.",
         subtitle: "Fullstack Developer",
         period: "April 2024 - Present",
@@ -11,7 +11,7 @@ export const workData: WorkExperience[] = [
         specialization: "NextJS, React, Typescript, Markdown, Tailwind CSS"
     },
     {
-        icon: "/images/work/3d.png",
+        icon: "/work/3d.png",
         title: "ModelsByAT",
         subtitle: "3D Asset Seller",
         period: "August 2019 - Present",

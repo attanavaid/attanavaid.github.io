@@ -2,7 +2,7 @@ import type { Project } from "@/types";
 
 export const projectsData: Project[] = [
   {
-    image: "/images/projects/COVID-19_Dashboard.png",
+    image: "/projects/COVID-19_Dashboard.png",
     title: "COVID-19 Dashboard",
     description:
       "A dashboard (with a lot of features) that records the cases, deaths, infection and vaccination rates for all states.",
@@ -12,7 +12,7 @@ export const projectsData: Project[] = [
     video: "https://youtu.be/BkuppQ6BOvQ",
   },
   {
-    image: "/images/projects/MonitorIOApp.png",
+    image: "/projects/MonitorIOApp.png",
     title: "Monitor I/O Application",
     description:
       "An application that replicates the functionalities of a patient montior that is used in many hospitals.",
@@ -22,7 +22,7 @@ export const projectsData: Project[] = [
     video: "https://youtu.be/PCFuWk9LNLQ",
   },
   {
-    image: "/images/projects/RSA_and_factoring.png",
+    image: "/projects/RSA_and_factoring.png",
     title: "RSACryptools",
     description:
       "A utility tool that uses number-theoretic algorithms to generate and factor complex RSA keys of any modulus size.",
@@ -32,7 +32,7 @@ export const projectsData: Project[] = [
     video: "https://youtu.be/GoIiu89t97Q",
   },
   {
-    image: "/images/projects/EcommerceStore.png",
+    image: "/projects/EcommerceStore.png",
     title: "Ecommerce Store Website",
     description:
       "An ecommerce website created for a clothing store using Vue (JavaScript), Django (Python), Bulma CSS, and Stripe. The products are not real, the website is just an online shopping experience.",
@@ -42,7 +42,7 @@ export const projectsData: Project[] = [
     video: "https://youtu.be/wKRixVfUrNU",
   },
   {
-    image: "/images/projects/Aleph.png",
+    image: "/projects/Aleph.png",
     title: "Aleph",
     description:
       "A AI language model created using the text-davinci-003 model from Open AI's public API. Client is deployed on Vercel, server is deployed on Render.",
@@ -52,7 +52,7 @@ export const projectsData: Project[] = [
     video: "https://youtu.be/0YKChYowlWw",
   },
   {
-    image: "/images/projects/DALL-E_Clone_App.png",
+    image: "/projects/DALL-E_Clone_App.png",
     title: "DALL-E Clone App",
     description:
       "A react app that uses OpenAI's dall-e, a deep learning model and AI system, to generate images and share it with the cloud. Client is deployed on Vercel, server is deployed on Render.",
@@ -62,7 +62,7 @@ export const projectsData: Project[] = [
     video: "https://youtu.be/wtT6NsTwbIk",
   },
   {
-    image: "/images/projects/PropUP.png",
+    image: "/projects/PropUP.png",
     title: "PropUP (Real Estate Management App)",
     description:
       "A fully functional full-stack MERN real estate management dashboard application with complete CRUD functionalities, authentication, pagination, sorting, filtering, and more. Client is deployed on Netlify, server is deployed on Render.",
@@ -80,7 +80,7 @@ export const projectsData: Project[] = [
     video: "https://youtu.be/RWkGyF57AeI",
   },
   {
-    image: "/images/projects/Cryptoline.png",
+    image: "/projects/Cryptoline.png",
     title: "Cryptoline (Web 3.0 App)",
     description:
       "A fully functional Web 3.0 application that allows you to send ethereum anywhere you want. Made with Solidity, HardHat, Metamask, and Alchemy. Deployed on Netlify.",
@@ -90,7 +90,7 @@ export const projectsData: Project[] = [
     video: "https://youtu.be/vJ7PPzic_Hw",
   },
   {
-    image: "/images/projects/Beatstream.png",
+    image: "/projects/Beatstream.png",
     title: "Beatsream (Spotify Clone App)",
     description:
       "A fully functional music playing application that allows you to browse through top songs and artists, and play any song you like. Deployed on Netlify.",
@@ -100,7 +100,7 @@ export const projectsData: Project[] = [
     video: "https://youtu.be/F6JEhnLUnng",
   },
   {
-    image: "/images/projects/RunRadar.png",
+    image: "/projects/RunRadar.png",
     title: "RunRadar",
     description:
       "A C# CRUD and social media application for runners made using SQl and Cloudinary. Deployed on Azure.",
@@ -110,7 +110,7 @@ export const projectsData: Project[] = [
     video: "https://youtu.be/daIygvuJSnU",
   },
   {
-    image: "/images/projects/Devflix.png",
+    image: "/projects/Devflix.png",
     title: "Devflix (Netflix Clone App)",
     description:
       "A fully functional video streaming application that allows you to browse through videos, play them, and favorite them. Deployed on Vercel.",
@@ -120,7 +120,7 @@ export const projectsData: Project[] = [
     video: "https://youtu.be/NohcqgF8eIc",
   },
   {
-    image: "/images/projects/T-Shirt_Design_App.png",
+    image: "/projects/T-Shirt_Design_App.png",
     title: "T-Shirt Design App",
     description:
       "An app thats designs male t-shirts for you using 3D models (ThreeJS), AI (OpenAI's DALL-E), and image manipulation. Deployed on Vercel.",
@@ -130,7 +130,7 @@ export const projectsData: Project[] = [
     video: "https://youtu.be/07r8ppNHkQQ",
   },
   {
-    image: "/images/projects/soap.png",
+    image: "/projects/soap.png",
     title: "System for Occupancy Agreement Processing (SOAP) Database",
     description:
       "A SOAP and government agnecies database that can be accessed using a python-sqlite3 API",
