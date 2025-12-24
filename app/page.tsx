@@ -187,18 +187,21 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Subtle dark overlay for better text contrast */}
+        <div className="absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-black/30 dark:from-black/40 dark:via-transparent dark:to-black/50 z-5 pointer-events-none" />
+
         <div
           ref={heroRef}
           className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center"
         >
           <div className="space-y-8">
             <div className="overflow-hidden">
-              <h2 className="animate-slide-up text-sm font-medium tracking-widest text-gray-600 dark:text-gray-400 uppercase">
+              <h2 className="animate-slide-up text-sm font-medium tracking-widest text-white uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                 Welcome
               </h2>
             </div>
             <div className="overflow-hidden">
-              <h1 className="animate-slide-up-delay text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight text-black dark:text-white">
+              <h1 className="animate-slide-up-delay text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
                 <span className="inline-block">Atta</span>{" "}
                 <span className="inline-block">Navaid</span>
               </h1>
@@ -206,34 +209,34 @@ export default function Home() {
             <div className="h-16 overflow-hidden sm:h-20">
               <div
                 key={currentRole}
-                className="animate-fade-in-up text-2xl sm:text-3xl md:text-4xl font-light text-gray-700 dark:text-gray-300"
+                className="animate-fade-in-up text-2xl sm:text-3xl md:text-4xl font-light text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
               >
                 {roles[currentRole]}
               </div>
             </div>
             <div className="overflow-hidden">
-              <p className="animate-slide-up-delay-2 max-w-2xl mx-auto text-lg sm:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="animate-slide-up-delay-2 max-w-2xl mx-auto text-lg sm:text-xl text-white leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]">
                 Crafting digital experiences through code, design, and innovation
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8 animate-fade-in">
               <a
                 href="#projects"
-                className="group relative px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-medium rounded-full overflow-hidden transition-all duration-300 hover:scale-105"
+                className="group relative px-8 py-4 bg-white text-black font-medium rounded-full overflow-hidden transition-all duration-300 hover:scale-105 shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
               >
                 <span className="relative z-10">View My Work</span>
-                <div className="absolute inset-0 bg-linear-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-linear-to-r from-gray-200 to-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
               <a
                 href="#contact"
-                className="px-8 py-4 border-2 border-black dark:border-white text-black dark:text-white font-medium rounded-full transition-all duration-300 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
+                className="px-8 py-4 border-2 border-white text-white font-medium rounded-full transition-all duration-300 hover:bg-white hover:text-black shadow-[0_4px_12px_rgba(0,0,0,0.5)] backdrop-blur-sm bg-white/10"
               >
                 Get In Touch
               </a>
             </div>
           </div>
           <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
-            <div className="flex flex-col items-center gap-2 text-gray-500 dark:text-gray-500">
+            <div className="flex flex-col items-center gap-2 text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]">
               <span className="text-xs uppercase tracking-wider">Scroll</span>
               <svg
                 className="w-6 h-6"
