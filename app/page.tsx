@@ -13,15 +13,31 @@ export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [currentRole, setCurrentRole] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
+  const [sectionOffsets, setSectionOffsets] = useState<Record<string, number>>({});
 
   const roles = ["Developer", "Designer", "Creator", "Innovator"];
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
+      
+      // Calculate offsets for each section
+      const sections = ['hero', 'projects', 'work', 'skills', 'education', 'languages', 'contact'];
+      const offsets: Record<string, number> = {};
+      
+      sections.forEach((sectionId) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          offsets[sectionId] = window.scrollY - rect.top + window.innerHeight;
+        }
+      });
+      
+      setSectionOffsets(offsets);
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial call
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -38,44 +54,137 @@ export default function Home() {
   return (
     <div className="relative overflow-hidden bg-white dark:bg-black">
       {/* Hero Section */}
-      <section className="relative min-h-screen overflow-hidden">
-        {/* Parallax Background Layers */}
-        <div className="absolute inset-0 overflow-hidden">
+      <section id="hero" className="relative min-h-screen overflow-hidden">
+        {/* Parallax Image Layers - Using actual parallax images */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Layer 1: Hill 1 (Background - slowest movement) */}
           <div
-            className="absolute -top-20 -right-20 h-96 w-96 rounded-full border border-gray-300 dark:border-gray-700 opacity-20 blur-3xl"
+            className="absolute inset-0 w-full h-full"
             style={{
-              transform: `translateY(${parallaxOffset * 0.3}px) translateX(${parallaxOffset * 0.2}px)`,
+              transform: `translateY(${parallaxOffset * 0.1}px)`,
             }}
-          />
+          >
+            <Image
+              src="/parallax/hill1.png"
+              alt="Parallax background hill 1"
+              fill
+              className="object-cover object-bottom"
+              priority
+              style={{ filter: "grayscale(100%) contrast(1.2)" }}
+            />
+          </div>
+
+          {/* Layer 2: Hill 2 */}
           <div
-            className="absolute top-40 -left-32 h-80 w-80 rounded-full border border-gray-300 dark:border-gray-700 opacity-15 blur-3xl"
+            className="absolute inset-0 w-full h-full"
             style={{
-              transform: `translateY(${parallaxOffset * 0.25}px) translateX(${-parallaxOffset * 0.15}px)`,
+              transform: `translateY(${parallaxOffset * 0.2}px)`,
             }}
-          />
+          >
+            <Image
+              src="/parallax/hill2.png"
+              alt="Parallax background hill 2"
+              fill
+              className="object-cover object-bottom"
+              style={{ filter: "grayscale(100%) contrast(1.2)" }}
+            />
+          </div>
+
+          {/* Layer 3: Hill 3 */}
           <div
-            className="absolute bottom-20 right-1/4 h-64 w-64 rotate-45 border-2 border-gray-400 dark:border-gray-600 opacity-10"
+            className="absolute inset-0 w-full h-full"
             style={{
-              transform: `translateY(${parallaxOffset * 0.5}px) rotate(${scrollY * 0.1}deg)`,
+              transform: `translateY(${parallaxOffset * 0.3}px)`,
             }}
-          />
+          >
+            <Image
+              src="/parallax/hill3.png"
+              alt="Parallax background hill 3"
+              fill
+              className="object-cover object-bottom"
+              style={{ filter: "grayscale(100%) contrast(1.2)" }}
+            />
+          </div>
+
+          {/* Layer 4: Hill 4 */}
           <div
-            className="absolute top-1/3 left-1/4 h-48 w-48 rotate-12 border-2 border-gray-400 dark:border-gray-600 opacity-10"
+            className="absolute inset-0 w-full h-full"
             style={{
-              transform: `translateY(${parallaxOffset * 0.4}px) rotate(${-scrollY * 0.08}deg)`,
+              transform: `translateY(${parallaxOffset * 0.5}px)`,
             }}
-          />
+          >
+            <Image
+              src="/parallax/hill4.png"
+              alt="Parallax background hill 4"
+              fill
+              className="object-cover object-bottom"
+              style={{ filter: "grayscale(100%) contrast(1.2)" }}
+            />
+          </div>
+
+          {/* Layer 5: Tree */}
           <div
-            className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03]"
+            className="absolute inset-0 w-full h-full"
             style={{
-              backgroundImage: `
-                linear-gradient(gray 1px, transparent 1px),
-                linear-gradient(90deg, gray 1px, transparent 1px)
-              `,
-              backgroundSize: "50px 50px",
+              transform: `translateY(${parallaxOffset * 0.7}px)`,
+            }}
+          >
+            <Image
+              src="/parallax/tree.png"
+              alt="Parallax tree"
+              fill
+              className="object-cover object-bottom"
+              style={{ filter: "grayscale(100%) contrast(1.2)" }}
+            />
+          </div>
+
+          {/* Layer 6: Hill 5 */}
+          <div
+            className="absolute inset-0 w-full h-full"
+            style={{
               transform: `translateY(${parallaxOffset * 0.8}px)`,
             }}
-          />
+          >
+            <Image
+              src="/parallax/hill5.png"
+              alt="Parallax background hill 5"
+              fill
+              className="object-cover object-bottom"
+              style={{ filter: "grayscale(100%) contrast(1.2)" }}
+            />
+          </div>
+
+          {/* Layer 7: Plant (foreground - fastest movement) */}
+          <div
+            className="absolute inset-0 w-full h-full"
+            style={{
+              transform: `translateY(${parallaxOffset * 0.9}px)`,
+            }}
+          >
+            <Image
+              src="/parallax/plant.png"
+              alt="Parallax plant"
+              fill
+              className="object-cover object-bottom"
+              style={{ filter: "grayscale(100%) contrast(1.2)" }}
+            />
+          </div>
+
+          {/* Layer 8: Leaf (foreground - fastest movement) */}
+          <div
+            className="absolute inset-0 w-full h-full"
+            style={{
+              transform: `translateY(${parallaxOffset * 1.0}px)`,
+            }}
+          >
+            <Image
+              src="/parallax/leaf.png"
+              alt="Parallax leaf"
+              fill
+              className="object-cover object-bottom"
+              style={{ filter: "grayscale(100%) contrast(1.2)" }}
+            />
+          </div>
         </div>
 
         <div
@@ -145,8 +254,19 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="relative py-32 px-6 bg-white dark:bg-black">
-        <div className="max-w-7xl mx-auto">
+      <section id="projects" className="relative py-32 px-6 bg-white dark:bg-black overflow-hidden">
+        {/* Subtle Parallax Background for Projects */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div
+            className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03]"
+            style={{
+              backgroundImage: `radial-gradient(circle, gray 1px, transparent 1px)`,
+              backgroundSize: "40px 40px",
+              transform: `translateY(${sectionOffsets.projects ? sectionOffsets.projects * 0.3 : 0}px)`,
+            }}
+          />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
               Projects
@@ -217,8 +337,19 @@ export default function Home() {
       </section>
 
       {/* Work Experience Section */}
-      <section id="work" className="relative py-32 px-6 bg-gray-50 dark:bg-gray-950">
-        <div className="max-w-5xl mx-auto">
+      <section id="work" className="relative py-32 px-6 bg-gray-50 dark:bg-gray-950 overflow-hidden">
+        {/* Subtle Parallax Background for Work */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div
+            className="absolute inset-0 opacity-[0.015] dark:opacity-[0.02]"
+            style={{
+              backgroundImage: `radial-gradient(circle, gray 1px, transparent 1px)`,
+              backgroundSize: "50px 50px",
+              transform: `translateY(${sectionOffsets.work ? sectionOffsets.work * 0.25 : 0}px)`,
+            }}
+          />
+        </div>
+        <div className="relative z-10 max-w-5xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
               Work Experience
@@ -268,8 +399,19 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="relative py-32 px-6 bg-white dark:bg-black">
-        <div className="max-w-7xl mx-auto">
+      <section id="skills" className="relative py-32 px-6 bg-white dark:bg-black overflow-hidden">
+        {/* Subtle Parallax Background for Skills */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div
+            className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03]"
+            style={{
+              backgroundImage: `radial-gradient(circle, gray 1px, transparent 1px)`,
+              backgroundSize: "45px 45px",
+              transform: `translateY(${sectionOffsets.skills ? sectionOffsets.skills * 0.3 : 0}px)`,
+            }}
+          />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
               Skills
@@ -312,8 +454,19 @@ export default function Home() {
       </section>
 
       {/* Education Section */}
-      <section id="education" className="relative py-32 px-6 bg-gray-50 dark:bg-gray-950">
-        <div className="max-w-5xl mx-auto">
+      <section id="education" className="relative py-32 px-6 bg-gray-50 dark:bg-gray-950 overflow-hidden">
+        {/* Subtle Parallax Background for Education */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div
+            className="absolute inset-0 opacity-[0.015] dark:opacity-[0.02]"
+            style={{
+              backgroundImage: `radial-gradient(circle, gray 1px, transparent 1px)`,
+              backgroundSize: "50px 50px",
+              transform: `translateY(${sectionOffsets.education ? sectionOffsets.education * 0.25 : 0}px)`,
+            }}
+          />
+        </div>
+        <div className="relative z-10 max-w-5xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
               Education
@@ -367,8 +520,19 @@ export default function Home() {
       </section>
 
       {/* Languages Section */}
-      <section id="languages" className="relative py-32 px-6 bg-white dark:bg-black">
-        <div className="max-w-4xl mx-auto">
+      <section id="languages" className="relative py-32 px-6 bg-white dark:bg-black overflow-hidden">
+        {/* Subtle Parallax Background for Languages */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div
+            className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03]"
+            style={{
+              backgroundImage: `radial-gradient(circle, gray 1px, transparent 1px)`,
+              backgroundSize: "40px 40px",
+              transform: `translateY(${sectionOffsets.languages ? sectionOffsets.languages * 0.3 : 0}px)`,
+            }}
+          />
+        </div>
+        <div className="relative z-10 max-w-4xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
               Languages
@@ -713,3 +877,4 @@ function ContactSection() {
     </section>
   );
 }
+
