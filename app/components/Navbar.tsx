@@ -50,18 +50,28 @@ export default function Navbar() {
 
   // Close theme menu when clicking outside
   useEffect(() => {
+    if (!isThemeMenuOpen) return;
+
     const handleClickOutside = (event: MouseEvent) => {
-      if (themeMenuRef.current && !themeMenuRef.current.contains(event.target as Node)) {
-        setIsThemeMenuOpen(false);
+      const target = event.target as Node;
+      
+      // Don't close if clicking inside the menu container
+      if (themeMenuRef.current && themeMenuRef.current.contains(target)) {
+        return;
       }
+      
+      // Close if clicking outside
+      setIsThemeMenuOpen(false);
     };
 
-    if (isThemeMenuOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
+    // Use a small delay to ensure button clicks register first
+    const timeoutId = setTimeout(() => {
+      document.addEventListener("click", handleClickOutside);
+    }, 10);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      clearTimeout(timeoutId);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [isThemeMenuOpen]);
 
@@ -155,7 +165,7 @@ export default function Navbar() {
                   <button
                     onClick={() => {
                       setTheme("system");
-                      setIsThemeMenuOpen(false);
+                      setTimeout(() => setIsThemeMenuOpen(false), 10);
                     }}
                     className={`w-full px-4 py-3 text-left text-sm font-medium transition-colors ${
                       theme === "system"
@@ -178,7 +188,7 @@ export default function Navbar() {
                   <button
                     onClick={() => {
                       setTheme("light");
-                      setIsThemeMenuOpen(false);
+                      setTimeout(() => setIsThemeMenuOpen(false), 10);
                     }}
                     className={`w-full px-4 py-3 text-left text-sm font-medium transition-colors border-t-2 border-gray-300 dark:border-gray-700 ${
                       theme === "light"
@@ -201,7 +211,7 @@ export default function Navbar() {
                   <button
                     onClick={() => {
                       setTheme("dark");
-                      setIsThemeMenuOpen(false);
+                      setTimeout(() => setIsThemeMenuOpen(false), 10);
                     }}
                     className={`w-full px-4 py-3 text-left text-sm font-medium transition-colors border-t-2 border-gray-300 dark:border-gray-700 ${
                       theme === "dark"
@@ -256,7 +266,7 @@ export default function Navbar() {
                   <button
                     onClick={() => {
                       setTheme("system");
-                      setIsThemeMenuOpen(false);
+                      setTimeout(() => setIsThemeMenuOpen(false), 10);
                     }}
                     className={`w-full px-4 py-3 text-left text-sm font-medium transition-colors ${
                       theme === "system"
@@ -279,7 +289,7 @@ export default function Navbar() {
                   <button
                     onClick={() => {
                       setTheme("light");
-                      setIsThemeMenuOpen(false);
+                      setTimeout(() => setIsThemeMenuOpen(false), 10);
                     }}
                     className={`w-full px-4 py-3 text-left text-sm font-medium transition-colors border-t-2 border-gray-300 dark:border-gray-700 ${
                       theme === "light"
@@ -302,7 +312,7 @@ export default function Navbar() {
                   <button
                     onClick={() => {
                       setTheme("dark");
-                      setIsThemeMenuOpen(false);
+                      setTimeout(() => setIsThemeMenuOpen(false), 10);
                     }}
                     className={`w-full px-4 py-3 text-left text-sm font-medium transition-colors border-t-2 border-gray-300 dark:border-gray-700 ${
                       theme === "dark"
