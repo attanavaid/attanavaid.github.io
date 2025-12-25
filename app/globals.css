@@ -5,8 +5,18 @@
   --foreground: #171717;
 }
 
+:root.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+:root.light {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light):not(.dark) {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
@@ -76,4 +86,27 @@ html {
 .animate-fade-in {
   animation: fade-in 1s ease-out 0.6s forwards;
   opacity: 0;
+}
+
+/* Theme test styling for "Atta Navaid" header */
+.theme-test-header {
+  transition: all 0.3s ease;
+}
+
+/* System theme - blue tint */
+:root:not(.light):not(.dark) .theme-test-header,
+:root[data-theme="dark"] .theme-test-header {
+  filter: hue-rotate(180deg) saturate(1.2);
+}
+
+/* Light theme - warm yellow tint */
+:root.light .theme-test-header,
+:root[data-theme="light"] .theme-test-header {
+  filter: hue-rotate(30deg) saturate(1.1) brightness(1.1);
+}
+
+/* Dark theme - purple tint */
+:root.dark .theme-test-header,
+:root[data-theme="dark"] .theme-test-header {
+  filter: hue-rotate(270deg) saturate(1.3) brightness(0.9);
 }
