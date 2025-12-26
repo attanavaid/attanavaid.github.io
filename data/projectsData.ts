@@ -5,7 +5,7 @@ export const projectsData: Project[] = [
     image: "/projects/COVID-19_Dashboard.png",
     title: "COVID-19 Dashboard",
     description:
-      "A dashboard (with a lot of features) that records the cases, deaths, infection and vaccination rates for all states.",
+      "Interactive web dashboard visualizing COVID-19 infection and vaccination rates at the county level across all 50 US states. Features map-based geographic visualization, filtering, sorting controls, and time-series charts comparing local and national trends. Built with HTML, CSS, vanilla JavaScript frontend and Python/MySQL backend data pipeline. Collaborated in a small team to gather requirements, implement features incrementally, and present a working product with live demonstrations.",
     tags: ["javascript", "web-dev", "leaflet", "MySQL", "dashboard"],
     website: "https://singular-madeleine-ce2375.netlify.app/",
     github: "https://github.com/attanavaid/COVID-19_Dashboard",
@@ -65,7 +65,7 @@ export const projectsData: Project[] = [
     image: "/projects/PropUP.png",
     title: "PropUP (Real Estate Management App)",
     description:
-      "A fully functional full-stack MERN real estate management dashboard application with complete CRUD functionalities, authentication, pagination, sorting, filtering, and more. Client is deployed on Netlify, server is deployed on Render.",
+      "Production-ready full-stack MERN real estate management dashboard with complete CRUD operations, secure authentication, advanced pagination, multi-criteria sorting and filtering. Built with React, TypeScript, Express, MongoDB, and Material-UI. Features comprehensive property management, user roles, and real-time data updates. Client deployed on Netlify, server on Render with optimized performance.",
     tags: [
       "react",
       "typescript",
@@ -83,7 +83,7 @@ export const projectsData: Project[] = [
     image: "/projects/Cryptoline.png",
     title: "Cryptoline (Web 3.0 App)",
     description:
-      "A fully functional Web 3.0 application that allows you to send ethereum anywhere you want. Made with Solidity, HardHat, Metamask, and Alchemy. Deployed on Netlify.",
+      "Production Web 3.0 application enabling secure Ethereum transactions with blockchain integration. Built with Solidity smart contracts, HardHat development environment, MetaMask wallet integration, and Alchemy infrastructure. Features secure transaction processing, wallet connectivity, and real-time blockchain state updates. Deployed on Netlify with optimized gas efficiency.",
     tags: ["web3.0", "solidity", "hardhat", "metamask", "alchemy", "react"],
     website: "https://cryptoline.netlify.app/",
     github: "https://github.com/attanavaid/Cryptoline",
