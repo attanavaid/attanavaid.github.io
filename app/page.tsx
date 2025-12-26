@@ -6,6 +6,7 @@ import emailjs from "@emailjs/browser";
 import { projectsData } from "@/data/projectsData";
 import { workData } from "@/data/workData";
 import { skillsData } from "@/data/skillsData";
+import { currentlyLearningData } from "@/data/currentlyLearningData";
 import { educationData } from "@/data/educationData";
 import { languagesData } from "@/data/languagesData";
 import Navbar from "./components/Navbar";
@@ -23,7 +24,7 @@ export default function Home() {
       setScrollY(window.scrollY);
       
       // Calculate offsets for each section
-      const sections = ['hero', 'projects', 'work', 'skills', 'education', 'languages', 'contact'];
+      const sections = ['hero', 'work', 'education', 'skills', 'projects', 'languages', 'contact'];
       const offsets: Record<string, number> = {};
       
       sections.forEach((sectionId) => {
@@ -217,17 +218,37 @@ export default function Home() {
               </div>
             </div>
             <div className="overflow-hidden">
-              <p className="animate-slide-up-delay-2 max-w-2xl mx-auto text-lg sm:text-xl text-white leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]">
-                Crafting digital experiences through code, design, and innovation
+              <p className="animate-slide-up-delay-2 max-w-2xl mx-auto text-sm sm:text-base text-white leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)] px-4">
+                Full-stack developer based in the United States, specializing in building scalable, production-ready applications. Expertise in React, TypeScript, and Next.js with experience delivering solutions across frontend, backend, and data visualization. Passionate about creating efficient, maintainable code and solving complex technical challenges.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8 animate-fade-in">
               <a
-                href="#projects"
+                href="#work"
                 className="group relative px-8 py-4 bg-white text-black font-medium rounded-full overflow-hidden transition-all duration-300 hover:scale-105 shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
               >
                 <span className="relative z-10">View My Work</span>
                 <div className="absolute inset-0 bg-linear-to-r from-gray-200 to-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </a>
+              <a
+                href="/resume/Resume.pdf"
+                download="Atta_Navaid_Resume.pdf"
+                className="px-8 py-4 border-2 border-white text-white font-medium rounded-full transition-all duration-300 hover:bg-white hover:text-black shadow-[0_4px_12px_rgba(0,0,0,0.5)] backdrop-blur-sm bg-white/10 flex items-center gap-2"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+                Download Resume
               </a>
               <a
                 href="#contact"
@@ -258,8 +279,240 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Work Experience Section */}
+      <section id="work" className="relative py-32 px-6 bg-gray-50 dark:bg-gray-950 overflow-hidden">
+        {/* Subtle Parallax Background for Work */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div
+            className="absolute inset-0 opacity-[0.015] dark:opacity-[0.02]"
+            style={{
+              backgroundImage: `radial-gradient(circle, gray 1px, transparent 1px)`,
+              backgroundSize: "50px 50px",
+              transform: `translateY(${sectionOffsets.work ? sectionOffsets.work * 0.25 : 0}px)`,
+            }}
+          />
+        </div>
+        <div className="relative z-10 max-w-5xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
+              Work Experience
+            </h2>
+            <div className="w-24 h-1 bg-black dark:bg-white mx-auto"></div>
+          </div>
+          <div className="space-y-12">
+            {workData.map((work, index) => (
+              <div
+                key={index}
+                className="relative pl-12 border-l-2 border-gray-300 dark:border-gray-700"
+              >
+                <div className="absolute -left-6 top-0 w-12 h-12 rounded-full bg-white dark:bg-black border-4 border-gray-300 dark:border-gray-700 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-black dark:bg-white"></div>
+                </div>
+                <div className="flex gap-6 mb-4">
+                  <div className="relative w-16 h-16 shrink-0 rounded-lg overflow-hidden border-2 border-gray-300 dark:border-gray-700">
+                    <Image
+                      src={work.icon}
+                      alt={work.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-black dark:text-white mb-1">
+                      {work.title}
+                    </h3>
+                    <p className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      {work.subtitle}
+                    </p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                      {work.period} • {work.location}
+                    </p>
+                    <ul className="text-gray-600 dark:text-gray-400 mb-3 space-y-1.5 list-disc list-inside">
+                      {work.description.map((item, idx) => (
+                        <li key={idx} className="text-sm sm:text-base">
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="text-sm font-medium text-black dark:text-white">
+                      {work.specialization}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section id="education" className="relative py-32 px-6 bg-gray-50 dark:bg-gray-950 overflow-hidden">
+        {/* Subtle Parallax Background for Education */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div
+            className="absolute inset-0 opacity-[0.015] dark:opacity-[0.02]"
+            style={{
+              backgroundImage: `radial-gradient(circle, gray 1px, transparent 1px)`,
+              backgroundSize: "50px 50px",
+              transform: `translateY(${sectionOffsets.education ? sectionOffsets.education * 0.25 : 0}px)`,
+            }}
+          />
+        </div>
+        <div className="relative z-10 max-w-5xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
+              Education
+            </h2>
+            <div className="w-24 h-1 bg-black dark:bg-white mx-auto"></div>
+          </div>
+          <div className="space-y-12">
+            {educationData.map((edu, index) => (
+              <div
+                key={index}
+                className="relative pl-12 border-l-2 border-gray-300 dark:border-gray-700"
+              >
+                <div className="absolute -left-6 top-0 w-12 h-12 rounded-full bg-white dark:bg-black border-4 border-gray-300 dark:border-gray-700 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-black dark:bg-white"></div>
+                </div>
+                <div className="flex gap-6">
+                  <div className="relative w-16 h-16 shrink-0 rounded-lg overflow-hidden border-2 border-gray-300 dark:border-gray-700">
+                    <Image
+                      src={edu.icon}
+                      alt={edu.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-black dark:text-white mb-1">
+                      {edu.title}
+                    </h3>
+                    <p className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      {edu.subtitle}
+                    </p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      {edu.period} • {edu.location}
+                    </p>
+                    {edu.cgpa !== "N/A" && (
+                      <p className="text-sm font-medium text-black dark:text-white mb-1">
+                        CGPA: {edu.cgpa}
+                      </p>
+                    )}
+                    {edu.honors !== "N/A" && (
+                      <p className="text-sm text-gray-600 dark:text-gray-400 italic">
+                        {edu.honors}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="relative py-32 px-6 bg-white dark:bg-black overflow-hidden">
+        {/* Subtle Parallax Background for Skills */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div
+            className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03]"
+            style={{
+              backgroundImage: `radial-gradient(circle, gray 1px, transparent 1px)`,
+              backgroundSize: "45px 45px",
+              transform: `translateY(${sectionOffsets.skills ? sectionOffsets.skills * 0.3 : 0}px)`,
+            }}
+          />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
+              Skills
+            </h2>
+            <div className="w-24 h-1 bg-black dark:bg-white mx-auto"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {skillsData.map((skill, index) => (
+              <div
+                key={index}
+                className="p-6 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-black transition-all duration-300 hover:border-black dark:hover:border-white hover:shadow-lg"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="relative w-12 h-12 shrink-0">
+                    <Image
+                      src={skill.icon}
+                      alt={skill.name}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  <h3 className="text-xl font-bold text-black dark:text-white">
+                    {skill.name}
+                  </h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {skill.tech.map((tech, techIndex) => (
+                    <span
+                      key={techIndex}
+                      className="px-3 py-1 text-sm bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Currently Learning Section */}
+          <div className="mt-20">
+            <hr className="border-gray-300 dark:border-gray-700 mb-12" />
+            <div className="text-center mb-12">
+              <h3 className="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-2">
+                Currently Learning
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Expanding my skill set with emerging technologies
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {currentlyLearningData.map((skill, index) => (
+                <div
+                  key={index}
+                  className="p-6 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-black transition-all duration-300 hover:border-black dark:hover:border-white hover:shadow-lg opacity-90"
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="relative w-12 h-12 shrink-0">
+                      <Image
+                        src={skill.icon}
+                        alt={skill.name}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <h3 className="text-xl font-bold text-black dark:text-white">
+                      {skill.name}
+                    </h3>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {skill.tech.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="px-3 py-1 text-sm bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Projects Section */}
-      <section id="projects" className="relative py-32 px-6 bg-white dark:bg-black overflow-hidden">
+      <section id="projects" className="relative py-32 px-6 bg-gray-50 dark:bg-gray-950 overflow-hidden">
         {/* Subtle Parallax Background for Projects */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div
@@ -332,189 +585,6 @@ export default function Home() {
                       >
                         GitHub →
                       </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Work Experience Section */}
-      <section id="work" className="relative py-32 px-6 bg-gray-50 dark:bg-gray-950 overflow-hidden">
-        {/* Subtle Parallax Background for Work */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div
-            className="absolute inset-0 opacity-[0.015] dark:opacity-[0.02]"
-            style={{
-              backgroundImage: `radial-gradient(circle, gray 1px, transparent 1px)`,
-              backgroundSize: "50px 50px",
-              transform: `translateY(${sectionOffsets.work ? sectionOffsets.work * 0.25 : 0}px)`,
-            }}
-          />
-        </div>
-        <div className="relative z-10 max-w-5xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
-              Work Experience
-            </h2>
-            <div className="w-24 h-1 bg-black dark:bg-white mx-auto"></div>
-          </div>
-          <div className="space-y-12">
-            {workData.map((work, index) => (
-              <div
-                key={index}
-                className="relative pl-12 border-l-2 border-gray-300 dark:border-gray-700"
-              >
-                <div className="absolute -left-6 top-0 w-12 h-12 rounded-full bg-white dark:bg-black border-4 border-gray-300 dark:border-gray-700 flex items-center justify-center">
-                  <div className="w-8 h-8 rounded-full bg-black dark:bg-white"></div>
-                </div>
-                <div className="flex gap-6 mb-4">
-                  <div className="relative w-16 h-16 shrink-0 rounded-lg overflow-hidden border-2 border-gray-300 dark:border-gray-700">
-                    <Image
-                      src={work.icon}
-                      alt={work.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-black dark:text-white mb-1">
-                      {work.title}
-                    </h3>
-                    <p className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      {work.subtitle}
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                      {work.period} • {work.location}
-                    </p>
-                    <p className="text-gray-600 dark:text-gray-400 mb-3">
-                      {work.description}
-                    </p>
-                    <p className="text-sm font-medium text-black dark:text-white">
-                      {work.specialization}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="relative py-32 px-6 bg-white dark:bg-black overflow-hidden">
-        {/* Subtle Parallax Background for Skills */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div
-            className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03]"
-            style={{
-              backgroundImage: `radial-gradient(circle, gray 1px, transparent 1px)`,
-              backgroundSize: "45px 45px",
-              transform: `translateY(${sectionOffsets.skills ? sectionOffsets.skills * 0.3 : 0}px)`,
-            }}
-          />
-        </div>
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
-              Skills
-            </h2>
-            <div className="w-24 h-1 bg-black dark:bg-white mx-auto"></div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skillsData.map((skill, index) => (
-              <div
-                key={index}
-                className="p-6 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-black transition-all duration-300 hover:border-black dark:hover:border-white hover:shadow-lg"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="relative w-12 h-12 shrink-0">
-                    <Image
-                      src={skill.icon}
-                      alt={skill.name}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                  <h3 className="text-xl font-bold text-black dark:text-white">
-                    {skill.name}
-                  </h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {skill.tech.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1 text-sm bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Education Section */}
-      <section id="education" className="relative py-32 px-6 bg-gray-50 dark:bg-gray-950 overflow-hidden">
-        {/* Subtle Parallax Background for Education */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div
-            className="absolute inset-0 opacity-[0.015] dark:opacity-[0.02]"
-            style={{
-              backgroundImage: `radial-gradient(circle, gray 1px, transparent 1px)`,
-              backgroundSize: "50px 50px",
-              transform: `translateY(${sectionOffsets.education ? sectionOffsets.education * 0.25 : 0}px)`,
-            }}
-          />
-        </div>
-        <div className="relative z-10 max-w-5xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
-              Education
-            </h2>
-            <div className="w-24 h-1 bg-black dark:bg-white mx-auto"></div>
-          </div>
-          <div className="space-y-12">
-            {educationData.map((edu, index) => (
-              <div
-                key={index}
-                className="relative pl-12 border-l-2 border-gray-300 dark:border-gray-700"
-              >
-                <div className="absolute -left-6 top-0 w-12 h-12 rounded-full bg-white dark:bg-black border-4 border-gray-300 dark:border-gray-700 flex items-center justify-center">
-                  <div className="w-8 h-8 rounded-full bg-black dark:bg-white"></div>
-                </div>
-                <div className="flex gap-6">
-                  <div className="relative w-16 h-16 shrink-0 rounded-lg overflow-hidden border-2 border-gray-300 dark:border-gray-700">
-                    <Image
-                      src={edu.icon}
-                      alt={edu.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-black dark:text-white mb-1">
-                      {edu.title}
-                    </h3>
-                    <p className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      {edu.subtitle}
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                      {edu.period} • {edu.location}
-                    </p>
-                    {edu.cgpa !== "N/A" && (
-                      <p className="text-sm font-medium text-black dark:text-white mb-1">
-                        CGPA: {edu.cgpa}
-                      </p>
-                    )}
-                    {edu.honors !== "N/A" && (
-                      <p className="text-sm text-gray-600 dark:text-gray-400 italic">
-                        {edu.honors}
-                      </p>
                     )}
                   </div>
                 </div>
