@@ -97,7 +97,7 @@ export default function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b-2 ${
         isScrolled
           ? "bg-white/95 dark:bg-black/95 backdrop-blur-md border-gray-300 dark:border-gray-700 shadow-lg"
-          : "bg-transparent border-transparent"
+          : "bg-white/80 dark:bg-transparent backdrop-blur-sm border-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
@@ -112,7 +112,7 @@ export default function Navbar() {
               src="/logo512.png"
               alt="Atta Navaid Logo"
               fill
-              className="object-contain"
+              className="object-contain dark:invert"
               priority
             />
           </a>

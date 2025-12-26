@@ -56,7 +56,7 @@ export default function Home() {
     <div className="relative overflow-hidden bg-white dark:bg-black">
       <Navbar />
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen overflow-hidden pt-20">
+      <section id="hero" className="relative min-h-screen overflow-hidden">
         {/* Parallax Image Layers - Using actual parallax images */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Layer 1: Hill 1 (Background - slowest movement) */}
@@ -194,7 +194,7 @@ export default function Home() {
 
         <div
           ref={heroRef}
-          className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center"
+          className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center pt-20 -mt-5"
         >
           <div className="space-y-8">
             <div className="overflow-hidden">
@@ -203,7 +203,7 @@ export default function Home() {
               </h2>
             </div>
             <div className="overflow-hidden">
-              <h1 className="animate-slide-up-delay text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] theme-test-header">
+              <h1 className="animate-slide-up-delay text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
                 <span className="inline-block">Atta</span>{" "}
                 <span className="inline-block">Navaid</span>
               </h1>
