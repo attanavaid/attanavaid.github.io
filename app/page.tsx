@@ -9,11 +9,13 @@ import { skillsData } from "@/data/skillsData";
 import { currentlyLearningData } from "@/data/currentlyLearningData";
 import { educationData } from "@/data/educationData";
 import { languagesData } from "@/data/languagesData";
+import type { WorkExperience, Education } from "@/types";
 import Navbar from "./components/Navbar";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [currentRole, setCurrentRole] = useState(0);
+  const [timelineView, setTimelineView] = useState<"work" | "education">("work");
   const heroRef = useRef<HTMLDivElement>(null);
   const [sectionOffsets, setSectionOffsets] = useState<Record<string, number>>({});
 
@@ -24,7 +26,7 @@ export default function Home() {
       setScrollY(window.scrollY);
       
       // Calculate offsets for each section
-      const sections = ['hero', 'work', 'education', 'skills', 'projects', 'languages', 'contact'];
+      const sections = ['hero', 'experience', 'skills', 'projects', 'languages', 'contact'];
       const offsets: Record<string, number> = {};
       
       sections.forEach((sectionId) => {
@@ -224,7 +226,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8 animate-fade-in">
               <a
-                href="#work"
+                href="#experience"
                 className="group relative px-8 py-4 bg-white text-black font-medium rounded-full overflow-hidden transition-all duration-300 hover:scale-105 shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
               >
                 <span className="relative z-10">View My Work</span>
@@ -279,134 +281,77 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Work Experience Section */}
-      <section id="work" className="relative py-32 px-6 bg-gray-50 dark:bg-gray-950 overflow-hidden">
-        {/* Subtle Parallax Background for Work */}
+      {/* Timeline Section - Combined Work & Education */}
+      <section id="experience" className="relative py-32 px-6 bg-white dark:bg-black overflow-hidden">
+        {/* Animated Background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div
-            className="absolute inset-0 opacity-[0.015] dark:opacity-[0.02]"
+            className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03]"
             style={{
               backgroundImage: `radial-gradient(circle, gray 1px, transparent 1px)`,
               backgroundSize: "50px 50px",
-              transform: `translateY(${sectionOffsets.work ? sectionOffsets.work * 0.25 : 0}px)`,
+              transform: `translateY(${sectionOffsets.experience ? sectionOffsets.experience * 0.25 : 0}px)`,
             }}
           />
         </div>
-        <div className="relative z-10 max-w-5xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
-              Work Experience
-            </h2>
-            <div className="w-24 h-1 bg-black dark:bg-white mx-auto"></div>
-          </div>
-          <div className="space-y-12">
-            {workData.map((work, index) => (
-              <div
-                key={index}
-                className="relative pl-12 border-l-2 border-gray-300 dark:border-gray-700"
-              >
-                <div className="absolute -left-6 top-0 w-12 h-12 rounded-full bg-white dark:bg-black border-4 border-gray-300 dark:border-gray-700 flex items-center justify-center">
-                  <div className="w-8 h-8 rounded-full bg-black dark:bg-white"></div>
-                </div>
-                <div className="flex gap-6 mb-4">
-                  <div className="relative w-16 h-16 shrink-0 rounded-lg overflow-hidden border-2 border-gray-300 dark:border-gray-700">
-                    <Image
-                      src={work.icon}
-                      alt={work.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-black dark:text-white mb-1">
-                      {work.title}
-                    </h3>
-                    <p className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      {work.subtitle}
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                      {work.period} • {work.location}
-                    </p>
-                    <ul className="text-gray-600 dark:text-gray-400 mb-3 space-y-1.5 list-disc list-inside">
-                      {work.description.map((item, idx) => (
-                        <li key={idx} className="text-sm sm:text-base">
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="text-sm font-medium text-black dark:text-white">
-                      {work.specialization}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Education Section */}
-      <section id="education" className="relative py-32 px-6 bg-gray-50 dark:bg-gray-950 overflow-hidden">
-        {/* Subtle Parallax Background for Education */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div
-            className="absolute inset-0 opacity-[0.015] dark:opacity-[0.02]"
-            style={{
-              backgroundImage: `radial-gradient(circle, gray 1px, transparent 1px)`,
-              backgroundSize: "50px 50px",
-              transform: `translateY(${sectionOffsets.education ? sectionOffsets.education * 0.25 : 0}px)`,
-            }}
-          />
-        </div>
         <div className="relative z-10 max-w-5xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
-              Education
+          {/* Section Header with Toggle */}
+          <div className="text-center">
+            <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-8">
+              Experience
             </h2>
-            <div className="w-24 h-1 bg-black dark:bg-white mx-auto"></div>
-          </div>
-          <div className="space-y-12">
-            {educationData.map((edu, index) => (
+            
+            {/* Smaller Toggle Buttons with Equal Width */}
+            <div className="relative inline-flex items-center justify-center gap-2 mb-12 p-1 bg-white dark:bg-black rounded-full border-2 border-gray-300 dark:border-gray-700">
+              {/* Sliding Background Circle - Smooth Animation */}
               <div
-                key={index}
-                className="relative pl-12 border-l-2 border-gray-300 dark:border-gray-700"
+                className="absolute top-1 bottom-1 rounded-full bg-black dark:bg-white shadow-md transition-all duration-500 ease-in-out"
+                style={{
+                  width: "calc(50% - 0.25rem)",
+                  left: timelineView === "work" ? "0.125rem" : "calc(50% + 0.125rem)",
+                }}
+              />
+              
+              <button
+                onClick={() => setTimelineView("work")}
+                className={`relative z-10 w-24 py-2 rounded-full font-medium text-sm transition-colors duration-300 text-center ${
+                  timelineView === "work"
+                    ? "text-white dark:text-black"
+                    : "text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white"
+                }`}
               >
-                <div className="absolute -left-6 top-0 w-12 h-12 rounded-full bg-white dark:bg-black border-4 border-gray-300 dark:border-gray-700 flex items-center justify-center">
-                  <div className="w-8 h-8 rounded-full bg-black dark:bg-white"></div>
-                </div>
-                <div className="flex gap-6">
-                  <div className="relative w-16 h-16 shrink-0 rounded-lg overflow-hidden border-2 border-gray-300 dark:border-gray-700">
-                    <Image
-                      src={edu.icon}
-                      alt={edu.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-black dark:text-white mb-1">
-                      {edu.title}
-                    </h3>
-                    <p className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      {edu.subtitle}
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                      {edu.period} • {edu.location}
-                    </p>
-                    {edu.cgpa !== "N/A" && (
-                      <p className="text-sm font-medium text-black dark:text-white mb-1">
-                        CGPA: {edu.cgpa}
-                      </p>
-                    )}
-                    {edu.honors !== "N/A" && (
-                      <p className="text-sm text-gray-600 dark:text-gray-400 italic">
-                        {edu.honors}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
+                Work
+              </button>
+              <button
+                onClick={() => setTimelineView("education")}
+                className={`relative z-10 w-24 py-2 rounded-full font-medium text-sm transition-colors duration-300 text-center ${
+                  timelineView === "education"
+                    ? "text-white dark:text-black"
+                    : "text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white"
+                }`}
+              >
+                Education
+              </button>
+            </div>
+          </div>
+
+          {/* Experience Content - Node Connection Design */}
+          <div className="relative">
+            {/* Continuous Vertical Line - Runs through all boxes */}
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-300 dark:bg-gray-700 transform -translate-x-1/2 z-0"></div>
+
+            {/* Centered Items Container */}
+            <div className="space-y-16 md:space-y-20">
+              {[0, 1].map((index) => (
+                <ExperienceNodeWrapper
+                  key={`${timelineView}-${index}`}
+                  timelineView={timelineView}
+                  workData={workData[index]}
+                  educationData={educationData[index]}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -644,6 +589,196 @@ export default function Home() {
 
       {/* Contact Section */}
       <ContactSection />
+    </div>
+  );
+}
+
+// Location Icon Component - Reusable
+function LocationIcon({ className = "w-3 h-3" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+      />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+      />
+    </svg>
+  );
+}
+
+// Experience Node Wrapper Component - Symmetrical with Continuous Line
+function ExperienceNodeWrapper({
+  timelineView,
+  workData,
+  educationData,
+}: {
+  timelineView: "work" | "education";
+  workData: WorkExperience | undefined;
+  educationData: Education | undefined;
+}) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const data = timelineView === "work" ? workData : educationData;
+  const type = timelineView === "work" ? "work" : "education";
+
+  return (
+    <div className="relative flex flex-col items-center">
+      {/* Centered Content Box - Connected to continuous line */}
+      <div className="w-full max-w-2xl mx-auto relative z-10">
+        <div className={`p-4 md:p-6 rounded-xl border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-black flex flex-col transition-all duration-300 ${
+          isExpanded ? "h-auto" : "h-auto md:h-[350px]"
+        }`}>
+          <TimelineContent
+            key={`${type}-${data?.title || 'empty'}`}
+            data={data}
+            type={type}
+            isExpanded={isExpanded}
+            onToggleExpand={() => setIsExpanded(!isExpanded)}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Timeline Content Component - Only content changes
+function TimelineContent({
+  data,
+  type,
+  isExpanded,
+  onToggleExpand,
+}: {
+  data: WorkExperience | Education | undefined;
+  type: "work" | "education";
+  isExpanded: boolean;
+  onToggleExpand: () => void;
+}) {
+  if (!data) return null;
+
+  const isWork = type === "work" && "description" in data;
+  const isEducation = type === "education" && "cgpa" in data;
+  const hasExpandableContent = isWork && data.description && data.description.length > 2;
+
+  return (
+    <div className={`animate-fade-in-up flex flex-col ${isEducation ? "h-full" : ""}`}>
+      {/* Logo on top - Left aligned */}
+      <div className="mb-4 flex justify-start">
+        <div className="relative h-8 w-auto">
+          <Image
+            src={data.icon}
+            alt={data.title}
+            width={100}
+            height={32}
+            className="h-8 w-auto object-contain object-left"
+          />
+        </div>
+      </div>
+
+      {/* Text content below */}
+      <div className="mb-4">
+        <h3 className="text-lg md:text-xl font-bold text-black dark:text-white mb-1 wrap-break-word">
+          {data.title}
+        </h3>
+        <p className="text-sm md:text-base font-medium text-gray-700 dark:text-gray-300 mb-2 wrap-break-word">
+          {data.subtitle}
+        </p>
+        {isEducation ? (
+          <div className="text-xs text-gray-600 dark:text-gray-400 mb-3">
+            <p>{data.period}</p>
+            <p className="flex items-center gap-1 mt-1">
+              <LocationIcon />
+              {data.location}
+            </p>
+          </div>
+        ) : (
+          <p className="text-xs text-gray-600 dark:text-gray-400 mb-3 flex flex-wrap items-center gap-1.5">
+            <span>{data.period}</span>
+            <span>•</span>
+            <span className="flex items-center gap-1">
+              <LocationIcon />
+              {data.location}
+            </span>
+          </p>
+        )}
+      </div>
+
+      {/* Description/Content Section */}
+      <div className={`mb-3 ${isEducation ? "flex-1" : ""}`}>
+        {isWork && data.description && (
+          <div className="relative">
+            <ul className={`text-gray-600 dark:text-gray-400 space-y-2 text-left list-disc pl-5 ${
+              isExpanded ? "" : "max-h-24 md:max-h-24 overflow-hidden"
+            }`}>
+              {(isExpanded ? data.description : data.description.slice(0, 2)).map((item: string, idx: number) => (
+                <li key={idx} className="text-xs sm:text-sm wrap-break-word ml-2">
+                  {item}
+                </li>
+              ))}
+            </ul>
+            {/* Gradient fade overlay when collapsed */}
+            {!isExpanded && hasExpandableContent && (
+              <div className="absolute bottom-0 left-0 right-0 h-10 bg-linear-to-t from-white via-white/80 to-transparent dark:from-black dark:via-black/80 pointer-events-none"></div>
+            )}
+          </div>
+        )}
+
+        {isEducation && data.cgpa && data.cgpa !== "N/A" && (
+          <p className="text-sm md:text-base font-medium text-black dark:text-white mb-1 wrap-break-word">
+            CGPA: {data.cgpa}
+          </p>
+        )}
+      </div>
+
+      {/* Expand/Collapse button - Outside scrollable area */}
+      {isWork && hasExpandableContent && (
+        <div className="shrink-0 mb-2">
+          <button
+            onClick={onToggleExpand}
+            className="flex items-center gap-1 text-xs font-medium text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+          >
+            <span>{isExpanded ? "Read less" : "Read more"}</span>
+            <svg
+              className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+        </div>
+      )}
+
+      {/* Always reserve space for bottom section to prevent layout shift */}
+      <div className="mt-auto pt-3 border-t-2 border-gray-200 dark:border-gray-800 min-h-[40px] flex items-center">
+        {isWork && data.specialization ? (
+          <p className="text-xs font-medium text-black dark:text-white wrap-break-word">
+            {data.specialization}
+          </p>
+        ) : isEducation && data.honors && data.honors !== "N/A" ? (
+          <p className="text-xs text-gray-600 dark:text-gray-400 italic wrap-break-word">
+            {data.honors}
+          </p>
+        ) : (
+          <div className="text-xs font-medium text-transparent">Placeholder</div>
+        )}
+      </div>
     </div>
   );
 }

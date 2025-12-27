@@ -6,8 +6,7 @@ import { useTheme } from "./ThemeProvider";
 
 const navItems = [
   { name: "Home", id: "hero" },
-  { name: "Work", id: "work" },
-  { name: "Education", id: "education" },
+  { name: "Experience", id: "experience" },
   { name: "Skills", id: "skills" },
   { name: "Projects", id: "projects" },
   { name: "Languages", id: "languages" },
