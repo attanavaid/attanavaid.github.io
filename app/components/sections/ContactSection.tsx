@@ -2,6 +2,10 @@
 
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
+import { Input } from "@/app/components/ui/input";
+import { Textarea } from "@/app/components/ui/textarea";
+import { Button } from "@/app/components/ui/button";
+import { Alert, AlertDescription } from "@/app/components/ui/alert";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -116,14 +120,14 @@ export default function ContactSection() {
                 >
                   Name
                 </label>
-                <input
+                <Input
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white dark:bg-black border-2 border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:border-black dark:focus:border-white transition-colors text-black dark:text-white"
+                  className="w-full border-2 border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white"
                   placeholder="Your name"
                 />
               </div>
@@ -135,14 +139,14 @@ export default function ContactSection() {
                 >
                   Email
                 </label>
-                <input
+                <Input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white dark:bg-black border-2 border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:border-black dark:focus:border-white transition-colors text-black dark:text-white"
+                  className="w-full border-2 border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -154,14 +158,14 @@ export default function ContactSection() {
                 >
                   Subject
                 </label>
-                <input
+                <Input
                   type="text"
                   id="subject"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white dark:bg-black border-2 border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:border-black dark:focus:border-white transition-colors text-black dark:text-white"
+                  className="w-full border-2 border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white"
                   placeholder="What's this about?"
                 />
               </div>
@@ -173,42 +177,43 @@ export default function ContactSection() {
                 >
                   Message
                 </label>
-                <textarea
+                <Textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 bg-white dark:bg-black border-2 border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:border-black dark:focus:border-white transition-colors resize-none text-black dark:text-white"
+                  className="w-full border-2 border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white resize-none"
                   placeholder="Tell me about your project or just say hello..."
                 />
               </div>
 
-              <button
+              <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-medium rounded-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="w-full bg-black dark:bg-white text-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90 transition-all duration-300 hover:scale-105 disabled:hover:scale-100"
+                size="lg"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
-              </button>
+              </Button>
 
               {submitStatus === "success" && (
-                <div className="p-4 bg-gray-100 dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-700 rounded-lg text-center">
-                  <p className="text-black dark:text-white font-medium">
+                <Alert className="border-2 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-900">
+                  <AlertDescription className="text-black dark:text-white font-medium text-center">
                     {process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
                       ? "✓ Message sent successfully! I'll get back to you soon."
                       : "✓ Your email client should open shortly."}
-                  </p>
-                </div>
+                  </AlertDescription>
+                </Alert>
               )}
 
               {submitStatus === "error" && (
-                <div className="p-4 bg-gray-100 dark:bg-gray-900 border-2 border-red-300 dark:border-red-700 rounded-lg text-center">
-                  <p className="text-red-600 dark:text-red-400 font-medium">
+                <Alert className="border-2 border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-950/20">
+                  <AlertDescription className="text-red-600 dark:text-red-400 font-medium text-center">
                     Something went wrong. Please try again or email directly.
-                  </p>
-                </div>
+                  </AlertDescription>
+                </Alert>
               )}
             </form>
           </div>
