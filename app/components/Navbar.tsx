@@ -116,57 +116,57 @@ export default function Navbar() {
             ))}
             
             {/* Theme Toggle */}
-            <DropdownMenu>
+            <DropdownMenu modal={false}>
               <DropdownMenuTrigger asChild>
-                <button
-                  className="p-2 rounded-lg border-2 border-gray-300 dark:border-gray-700 text-black dark:text-white hover:border-black dark:hover:border-white transition-colors"
-                  aria-label="Theme toggle"
-                >
-                  {theme === "light" ? (
+              <button
+                className="p-2 rounded-lg border-2 border-gray-300 dark:border-gray-700 text-black dark:text-white hover:border-black dark:hover:border-white transition-colors"
+                aria-label="Theme toggle"
+              >
+                {theme === "light" ? (
                     <Sun className="w-5 h-5" />
-                  ) : theme === "dark" ? (
+                ) : theme === "dark" ? (
                     <Moon className="w-5 h-5" />
-                  ) : (
+                ) : (
                     <Monitor className="w-5 h-5" />
-                  )}
-                </button>
+                )}
+              </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-40">
                 <DropdownMenuItem
                   onClick={() => setTheme("system")}
                   className="flex items-center gap-3 cursor-pointer"
-                >
+                  >
                   <Monitor className="w-4 h-4" />
-                  <span>System</span>
-                  {theme === "system" && (
-                    <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  )}
+                      <span>System</span>
+                      {theme === "system" && (
+                        <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      )}
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() => setTheme("light")}
                   className="flex items-center gap-3 cursor-pointer"
-                >
+                  >
                   <Sun className="w-4 h-4" />
-                  <span>Light</span>
-                  {theme === "light" && (
-                    <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  )}
+                      <span>Light</span>
+                      {theme === "light" && (
+                        <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      )}
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() => setTheme("dark")}
                   className="flex items-center gap-3 cursor-pointer"
-                >
+                  >
                   <Moon className="w-4 h-4" />
-                  <span>Dark</span>
-                  {theme === "dark" && (
-                    <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  )}
+                      <span>Dark</span>
+                      {theme === "dark" && (
+                        <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      )}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -175,57 +175,57 @@ export default function Navbar() {
           {/* Right Side: Theme Toggle (Mobile) + Menu Button */}
           <div className="md:hidden flex items-center gap-2">
             {/* Theme Toggle - Mobile */}
-            <DropdownMenu>
+            <DropdownMenu modal={false}>
               <DropdownMenuTrigger asChild>
-                <button
-                  className="p-2 rounded-lg border-2 border-gray-300 dark:border-gray-700 text-black dark:text-white hover:border-black dark:hover:border-white transition-colors"
-                  aria-label="Theme toggle"
-                >
-                  {theme === "light" ? (
+              <button
+                className="p-2 rounded-lg border-2 border-gray-300 dark:border-gray-700 text-black dark:text-white hover:border-black dark:hover:border-white transition-colors"
+                aria-label="Theme toggle"
+              >
+                {theme === "light" ? (
                     <Sun className="w-5 h-5" />
-                  ) : theme === "dark" ? (
+                ) : theme === "dark" ? (
                     <Moon className="w-5 h-5" />
-                  ) : (
+                ) : (
                     <Monitor className="w-5 h-5" />
-                  )}
-                </button>
+                )}
+              </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-40">
                 <DropdownMenuItem
                   onClick={() => setTheme("system")}
                   className="flex items-center gap-3 cursor-pointer"
-                >
+                  >
                   <Monitor className="w-4 h-4" />
-                  <span>System</span>
-                  {theme === "system" && (
-                    <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  )}
+                      <span>System</span>
+                      {theme === "system" && (
+                        <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      )}
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() => setTheme("light")}
                   className="flex items-center gap-3 cursor-pointer"
-                >
+                  >
                   <Sun className="w-4 h-4" />
-                  <span>Light</span>
-                  {theme === "light" && (
-                    <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  )}
+                      <span>Light</span>
+                      {theme === "light" && (
+                        <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      )}
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() => setTheme("dark")}
                   className="flex items-center gap-3 cursor-pointer"
-                >
+                  >
                   <Moon className="w-4 h-4" />
-                  <span>Dark</span>
-                  {theme === "dark" && (
-                    <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  )}
+                      <span>Dark</span>
+                      {theme === "dark" && (
+                        <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      )}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
