@@ -19,7 +19,7 @@ export interface Project {
     image: string;
     title: string;
     description: string;
-    tags: string[];
+    tags: TechItem[];
     website?: string;
     github?: string;
     video?: string;
@@ -28,6 +28,7 @@ export interface Project {
 export interface TechItem {
     name: string;
     logo?: string;
+    icon?: string; // Name of Lucide icon component (e.g., "Globe", "Database")
 }
 
 export interface Skill {
