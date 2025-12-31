@@ -1,20 +1,32 @@
-import type { Skill } from '@/types';
+import type { Skill } from "@/types";
 
 export const currentlyLearningData: Skill[] = [
-    {
-        icon: "/skills/database.png",
-        name: "Database Technologies",
-        tech: ["PostgreSQL", "Redis", "Prisma ORM"]
-    },
-    {
-        icon: "/skills/nodejs.png",
-        name: "Backend & DevOps",
-        tech: ["Docker", "Kubernetes", "AWS", "GraphQL"]
-    },
-    {
-        icon: "/skills/react.png",
-        name: "Advanced Frontend",
-        tech: ["Remix", "Svelte", "WebAssembly"]
-    }
+  {
+    icon: "/skills/angular.png",
+    name: "More Web Frameworks",
+    tech: [
+      { name: "Angular", logo: "/skills/tech/angular.svg" },
+      { name: "Svelte", logo: "/skills/tech/svelte.svg" },
+      { name: "Ruby on Rails", logo: "/skills/tech/rubyonrails.svg" },
+    ],
+  },
+  {
+    icon: "/skills/flutter.png",
+    name: "Cross-Platform Development",
+    tech: [
+      { name: "Flutter", logo: "/skills/tech/flutter.svg" },
+      { name: "Expo", logo: "/skills/tech/expo.svg" },
+      { name: "React Native", logo: "/skills/tech/react.svg" },
+      { name: "Kotlin", logo: "/skills/tech/kotlin.svg" },
+    ],
+  },
+  {
+    icon: "/skills/seo.png",
+    name: "Backend & DevOps",
+    tech: [
+      { name: "Docker", logo: "/skills/tech/docker.svg" },
+      { name: "AWS", logo: "/skills/tech/amazonaws.svg" },
+      { name: "Kubernetes", logo: "/skills/tech/kubernetes.svg" },
+    ],
+  },
 ];
-
