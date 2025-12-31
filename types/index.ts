@@ -25,10 +25,15 @@ export interface Project {
     video?: string;
 }
 
+export interface TechItem {
+    name: string;
+    logo?: string;
+}
+
 export interface Skill {
     icon: string;
     name: string;
-    tech: string[];
+    tech: (string | TechItem)[];
 }
 
 export interface WorkExperience {
