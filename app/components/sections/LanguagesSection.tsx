@@ -196,10 +196,10 @@ export default function LanguagesSection({ sectionOffset }: LanguagesSectionProp
               </div>
             </div>
 
-            {/* Translation with Typewriter Effect */}
-            {currentLang.translation && (
-              <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
-                <div className="text-sm sm:text-base text-gray-600 dark:text-gray-400 italic leading-relaxed min-h-10">
+            {/* Translation with Typewriter Effect - Always render to prevent layout shift */}
+            <div className="pt-4 border-t border-gray-200 dark:border-gray-800 min-h-[60px]">
+              {currentLang.translation ? (
+                <div className="text-sm sm:text-base text-gray-600 dark:text-gray-400 italic leading-relaxed">
                   <Typewriter
                     key={`translation-${key}`}
                     onInit={(typewriter) => {
@@ -221,8 +221,12 @@ export default function LanguagesSection({ sectionOffset }: LanguagesSectionProp
                     }}
                   />
                 </div>
-              </div>
-            )}
+              ) : (
+                <div className="text-sm sm:text-base text-gray-600 dark:text-gray-400 italic leading-relaxed min-h-[24px]">
+                  {/* Empty space to maintain layout */}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
