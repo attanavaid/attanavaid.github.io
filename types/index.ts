@@ -44,6 +44,6 @@ export interface WorkExperience {
     period: string;
     location: string;
     description: string[];
-    specialization: string;
+    specialization: TechItem[];
 }
 
