@@ -139,13 +139,13 @@ export const skillsData: Skill[] = [
     ],
   },
   {
-    icon: "/skills/roblox.png",
+    icon: "/skills/unreal.png",
     name: "Game Development",
     tech: [
+      { name: "Unreal Engine", logo: "/skills/tech/unrealengine.svg" },
+      { name: "Unity", logo: "/skills/tech/unity.svg" },
       { name: "Roblox Studio", logo: "/skills/tech/robloxstudio.svg" },
       { name: "Lua", logo: "/skills/tech/lua.svg" },
-      { name: "Unity", logo: "/skills/tech/unity.svg" },
-      { name: "Unreal Engine", logo: "/skills/tech/unrealengine.svg" },
     ],
   },
 ];
