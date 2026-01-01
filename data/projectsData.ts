@@ -2,7 +2,7 @@ import type { Project } from "@/types";
 
 export const projectsData: Project[] = [
   {
-    image: "/projects/RivalsCompendium.mp4",
+    image: "/projects/RivalsCompendium.webm",
     title: "Rivals Compendium",
     description:
       "Production-ready web application serving as a comprehensive centralized data hub for a popular hero-shooter video game. Built with React and TypeScript for type-safe, scalable frontend architecture, Node.js backend infrastructure, and Puppeteer for automated web scraping and data aggregation. Features structured content management system using Markdown for SEO-optimized, maintainable content that supports frequent updates as the game evolves. Implemented responsive design with Tailwind CSS, performance optimization, and analytics integration. Deployed on Vercel with custom domain configuration and actively iterating toward monetization through strategic advertising placement and user engagement metrics.",
