@@ -5,6 +5,12 @@ import Image from "next/image";
 import { ExternalLink, X } from "lucide-react";
 import type { Project } from "@/types";
 
+// Helper function to check if a file is a video
+const isVideoFile = (path: string): boolean => {
+  const videoExtensions = ['.mp4', '.webm', '.mov', '.ogg'];
+  return videoExtensions.some(ext => path.toLowerCase().endsWith(ext));
+};
+
 interface ProjectModalProps {
   project: Project;
   isOpen: boolean;
@@ -51,26 +57,55 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
           <X className="w-5 h-5 text-black dark:text-white" />
         </button>
 
-        {/* Project Image */}
+        {/* Project Image/Video */}
         <div className="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden bg-gray-100 dark:bg-gray-900 shrink-0">
-          {/* Blurred background */}
-          <div className="absolute inset-0">
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className="object-cover blur-2xl scale-110 opacity-50"
-            />
-          </div>
-          {/* Main image */}
-          <div className="relative w-full h-full">
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className="object-contain"
-            />
-          </div>
+          {isVideoFile(project.image) ? (
+            <>
+              {/* Blurred background for video */}
+              <div className="absolute inset-0">
+                <video
+                  src={project.image}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover blur-2xl scale-110 opacity-50"
+                />
+              </div>
+              {/* Main video */}
+              <div className="relative w-full h-full">
+                <video
+                  src={project.image}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Blurred background */}
+              <div className="absolute inset-0">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover blur-2xl scale-110 opacity-50"
+                />
+              </div>
+              {/* Main image */}
+              <div className="relative w-full h-full">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </>
+          )}
         </div>
 
         {/* Project Content - Scrollable */}

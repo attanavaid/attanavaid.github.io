@@ -6,6 +6,12 @@ import { ExternalLink, Minus, ChevronDown, ChevronUp, Maximize2 } from "lucide-r
 import { projectsData } from "@/data/projectsData";
 import ProjectModal from "./ProjectModal";
 
+// Helper function to check if a file is a video
+const isVideoFile = (path: string): boolean => {
+  const videoExtensions = ['.mp4', '.webm', '.mov', '.ogg'];
+  return videoExtensions.some(ext => path.toLowerCase().endsWith(ext));
+};
+
 interface ProjectsSectionProps {
   sectionOffset: number;
 }
@@ -89,12 +95,23 @@ export default function ProjectsSection({ sectionOffset }: ProjectsSectionProps)
                 }
               >
               <div className="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-900">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                />
+                {isVideoFile(project.image) ? (
+                  <video
+                    src={project.image}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover"
+                  />
+                )}
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
