@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import { parallaxImages } from "../utils/imageImports";
 
 interface HeroSectionProps {
   scrollY: number;
@@ -25,7 +26,7 @@ export default function HeroSection({ scrollY, currentRole, roles }: HeroSection
           }}
         >
           <Image
-            src="/parallax/hill1.png"
+            src={parallaxImages.hill1}
             alt="Parallax background hill 1"
             fill
             className="object-cover object-bottom"
@@ -42,7 +43,7 @@ export default function HeroSection({ scrollY, currentRole, roles }: HeroSection
           }}
         >
           <Image
-            src="/parallax/hill2.png"
+            src={parallaxImages.hill2}
             alt="Parallax background hill 2"
             fill
             className="object-cover object-bottom"
@@ -58,7 +59,7 @@ export default function HeroSection({ scrollY, currentRole, roles }: HeroSection
           }}
         >
           <Image
-            src="/parallax/hill3.png"
+            src={parallaxImages.hill3}
             alt="Parallax background hill 3"
             fill
             className="object-cover object-bottom"
@@ -74,7 +75,7 @@ export default function HeroSection({ scrollY, currentRole, roles }: HeroSection
           }}
         >
           <Image
-            src="/parallax/hill4.png"
+            src={parallaxImages.hill4}
             alt="Parallax background hill 4"
             fill
             className="object-cover object-bottom"
@@ -90,7 +91,7 @@ export default function HeroSection({ scrollY, currentRole, roles }: HeroSection
           }}
         >
           <Image
-            src="/parallax/tree.png"
+            src={parallaxImages.tree}
             alt="Parallax tree"
             fill
             className="object-cover object-bottom"
@@ -106,7 +107,7 @@ export default function HeroSection({ scrollY, currentRole, roles }: HeroSection
           }}
         >
           <Image
-            src="/parallax/hill5.png"
+            src={parallaxImages.hill5}
             alt="Parallax background hill 5"
             fill
             className="object-cover object-bottom"
@@ -122,7 +123,7 @@ export default function HeroSection({ scrollY, currentRole, roles }: HeroSection
           }}
         >
           <Image
-            src="/parallax/plant.png"
+            src={parallaxImages.plant}
             alt="Parallax plant"
             fill
             className="object-cover object-bottom"
@@ -138,7 +139,7 @@ export default function HeroSection({ scrollY, currentRole, roles }: HeroSection
           }}
         >
           <Image
-            src="/parallax/leaf.png"
+            src={parallaxImages.leaf}
             alt="Parallax leaf"
             fill
             className="object-cover object-bottom"

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "./ThemeProvider";
+import { commonImages } from "./utils/imageImports";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -87,7 +88,7 @@ export default function Navbar() {
             className="relative h-10 w-10 hover:opacity-80 transition-opacity"
           >
             <Image
-              src="/logo512.png"
+              src={commonImages.logo}
               alt="Atta Navaid Logo"
               fill
               className="object-contain dark:invert"
