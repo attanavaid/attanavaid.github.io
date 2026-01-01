@@ -2,6 +2,22 @@ import type { Project } from "@/types";
 
 export const projectsData: Project[] = [
   {
+    image: "/projects/RivalsCompendium.mp4",
+    title: "Rivals Compendium",
+    description:
+      "Production-ready web application serving as a comprehensive centralized data hub for a popular hero-shooter video game. Built with React and TypeScript for type-safe, scalable frontend architecture, Node.js backend infrastructure, and Puppeteer for automated web scraping and data aggregation. Features structured content management system using Markdown for SEO-optimized, maintainable content that supports frequent updates as the game evolves. Implemented responsive design with Tailwind CSS, performance optimization, and analytics integration. Deployed on Vercel with custom domain configuration and actively iterating toward monetization through strategic advertising placement and user engagement metrics.",
+    tags: [
+      { name: "React", logo: "react.svg" },
+      { name: "TypeScript", logo: "typescript.svg" },
+      { name: "Node.js", logo: "nodejs.svg" },
+      { name: "Puppeteer", logo: "puppeteer.svg" },
+      { name: "Tailwind", logo: "tailwindcss.svg" },
+      { name: "Markdown", logo: "markdown.svg" },
+      { name: "Vercel", logo: "vercel.svg" },
+    ],
+    website: "https://www.rivals-compendium.com/",
+  },
+  {
     image: "/projects/COVID-19_Dashboard.png",
     title: "COVID-19 Dashboard",
     description:
@@ -23,21 +39,22 @@ export const projectsData: Project[] = [
     video: "https://youtu.be/BkuppQ6BOvQ",
   },
   {
-    image: "/projects/MonitorIOApp.png",
-    title: "Monitor I/O Application",
+    image: "/projects/Devflix.png",
+    title: "Devflix (Netflix Clone App)",
     description:
-      "Web application that replicates hospital patient monitor functionalities, displaying real-time vital signs and medical data visualization.",
+      "Full-featured video streaming platform with video browsing, playback, and favorites functionality. Built with Next.js, React, TypeScript, Prisma ORM, and MongoDB. Features responsive design and seamless video playback experience.",
     tags: [
-      { name: "HTML", logo: "html.svg" },
-      { name: "CSS", logo: "css.svg" },
-      { name: "JavaScript", logo: "javascript.svg" },
-      { name: "Bootstrap", logo: "bootstrap.svg" },
-      { name: "jQuery", logo: "jquery.svg" },
-      { name: "GitHub Pages", logo: "github.svg" },
+      { name: "React", logo: "react.svg" },
+      { name: "TypeScript", logo: "typescript.svg" },
+      { name: "Next.js", logo: "nextjs.svg" },
+      { name: "Prisma", logo: "prisma.svg" },
+      { name: "MongoDB", logo: "mongodb.svg" },
+      { name: "Tailwind", logo: "tailwindcss.svg" },
+      { name: "Vercel", logo: "vercel.svg" },
     ],
-    website: "https://attanavaid.github.io/MonitorIOApplication/",
-    github: "https://github.com/attanavaid/MonitorIOApplication",
-    video: "https://youtu.be/PCFuWk9LNLQ",
+    website: "https://devflix-roan.vercel.app/",
+    github: "https://github.com/attanavaid/devflix",
+    video: "https://youtu.be/NohcqgF8eIc",
   },
   {
     image: "/projects/RSA_and_factoring.png",
@@ -185,24 +202,6 @@ export const projectsData: Project[] = [
     video: "https://youtu.be/daIygvuJSnU",
   },
   {
-    image: "/projects/Devflix.png",
-    title: "Devflix (Netflix Clone App)",
-    description:
-      "Full-featured video streaming platform with video browsing, playback, and favorites functionality. Built with Next.js, React, TypeScript, Prisma ORM, and MongoDB. Features responsive design and seamless video playback experience.",
-    tags: [
-      { name: "React", logo: "react.svg" },
-      { name: "TypeScript", logo: "typescript.svg" },
-      { name: "Next.js", logo: "nextjs.svg" },
-      { name: "Prisma", logo: "prisma.svg" },
-      { name: "MongoDB", logo: "mongodb.svg" },
-      { name: "Tailwind", logo: "tailwindcss.svg" },
-      { name: "Vercel", logo: "vercel.svg" },
-    ],
-    website: "https://devflix-roan.vercel.app/",
-    github: "https://github.com/attanavaid/devflix",
-    video: "https://youtu.be/NohcqgF8eIc",
-  },
-  {
     image: "/projects/T-Shirt_Design_App.png",
     title: "T-Shirt Design App",
     description:
@@ -219,6 +218,23 @@ export const projectsData: Project[] = [
     website: "https://t-shirt-design-app.vercel.app/",
     github: "https://github.com/attanavaid/TShirtDesignApp",
     video: "https://youtu.be/07r8ppNHkQQ",
+  },
+  {
+    image: "/projects/MonitorIOApp.png",
+    title: "Monitor I/O Application",
+    description:
+      "Web application that replicates hospital patient monitor functionalities, displaying real-time vital signs and medical data visualization.",
+    tags: [
+      { name: "HTML", logo: "html.svg" },
+      { name: "CSS", logo: "css.svg" },
+      { name: "JavaScript", logo: "javascript.svg" },
+      { name: "Bootstrap", logo: "bootstrap.svg" },
+      { name: "jQuery", logo: "jquery.svg" },
+      { name: "GitHub Pages", logo: "github.svg" },
+    ],
+    website: "https://attanavaid.github.io/MonitorIOApplication/",
+    github: "https://github.com/attanavaid/MonitorIOApplication",
+    video: "https://youtu.be/PCFuWk9LNLQ",
   },
   {
     image: "/projects/soap.png",
