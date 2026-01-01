@@ -4,12 +4,8 @@ import { useEffect } from "react";
 import Image from "next/image";
 import { ExternalLink, X } from "lucide-react";
 import type { Project } from "@/types";
-
-// Helper function to check if a file is a video
-const isVideoFile = (path: string): boolean => {
-  const videoExtensions = ['.mp4', '.webm', '.mov', '.ogg'];
-  return videoExtensions.some(ext => path.toLowerCase().endsWith(ext));
-};
+import { commonImages } from "../utils/imageImports";
+import { isVideoFile } from "../utils/videoUtils";
 
 interface ProjectModalProps {
   project: Project;
@@ -69,7 +65,9 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   loop
                   muted
                   playsInline
+                  preload="auto"
                   className="w-full h-full object-cover blur-2xl scale-110 opacity-50"
+                  aria-hidden="true"
                 />
               </div>
               {/* Main video */}
@@ -80,7 +78,9 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   loop
                   muted
                   playsInline
+                  preload="auto"
                   className="w-full h-full object-contain"
+                  aria-label={`${project.title} video`}
                 />
               </div>
             </>
@@ -90,9 +90,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
               <div className="absolute inset-0">
                 <Image
                   src={project.image}
-                  alt={project.title}
+                  alt=""
                   fill
                   className="object-cover blur-2xl scale-110 opacity-50"
+                  aria-hidden="true"
                 />
               </div>
               {/* Main image */}
@@ -175,7 +176,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             >
               <div className="relative w-4 h-4">
                 <Image
-                  src="/skills/tech/github.svg"
+                  src={commonImages.githubLogo}
                   alt="GitHub"
                   fill
                   className="object-contain tech-logo"
@@ -193,7 +194,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             >
               <div className="relative w-4 h-4">
                 <Image
-                  src="/skills/tech/youtube.svg"
+                  src={commonImages.youtubeLogo}
                   alt="YouTube"
                   fill
                   className="object-contain tech-logo"

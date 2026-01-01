@@ -5,12 +5,8 @@ import Image from "next/image";
 import { ExternalLink, Minus, ChevronDown, ChevronUp, Maximize2 } from "lucide-react";
 import { projectsData } from "@/data/projectsData";
 import ProjectModal from "./ProjectModal";
-
-// Helper function to check if a file is a video
-const isVideoFile = (path: string): boolean => {
-  const videoExtensions = ['.mp4', '.webm', '.mov', '.ogg'];
-  return videoExtensions.some(ext => path.toLowerCase().endsWith(ext));
-};
+import { commonImages } from "../utils/imageImports";
+import { isVideoFile } from "../utils/videoUtils";
 
 interface ProjectsSectionProps {
   sectionOffset: number;
@@ -102,7 +98,9 @@ export default function ProjectsSection({ sectionOffset }: ProjectsSectionProps)
                     loop
                     muted
                     playsInline
+                    preload={index < 3 ? "auto" : "metadata"}
                     className="w-full h-full object-cover"
+                    aria-label={`${project.title} video preview`}
                   />
                 ) : (
                   <Image
@@ -110,6 +108,7 @@ export default function ProjectsSection({ sectionOffset }: ProjectsSectionProps)
                     alt={project.title}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 )}
                 <button
@@ -217,7 +216,7 @@ export default function ProjectsSection({ sectionOffset }: ProjectsSectionProps)
                     >
                       <div className="relative w-5 h-5">
                         <Image
-                          src="/skills/tech/github.svg"
+                          src={commonImages.githubLogo}
                           alt="GitHub"
                           fill
                           className="object-contain tech-logo"
@@ -236,7 +235,7 @@ export default function ProjectsSection({ sectionOffset }: ProjectsSectionProps)
                     >
                       <div className="relative w-5 h-5">
                         <Image
-                          src="/skills/tech/youtube.svg"
+                          src={commonImages.youtubeLogo}
                           alt="YouTube"
                           fill
                           className="object-contain tech-logo"
