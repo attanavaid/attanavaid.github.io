@@ -192,7 +192,7 @@ export default function ContactSection() {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-black dark:bg-white text-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90 transition-all duration-300 hover:scale-105 disabled:hover:scale-100"
+                className="w-full bg-black dark:bg-white text-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90 transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 size="lg"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
@@ -231,11 +231,11 @@ export default function ContactSection() {
               {/* Direct Email */}
               <a
                 href="mailto:attanavaid@gmail.com"
-                className="flex items-center gap-4 p-4 rounded-lg border-2 border-gray-300 dark:border-gray-700 hover:border-black dark:hover:border-white transition-all duration-300 mb-6 group"
+                className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg border-2 border-gray-300 dark:border-gray-700 hover:border-black dark:hover:border-white transition-all duration-300 mb-6 group"
               >
-                <div className="w-12 h-12 rounded-full bg-black dark:bg-white flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black dark:bg-white flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <svg
-                    className="w-6 h-6 text-white dark:text-black"
+                    className="w-5 h-5 sm:w-6 sm:h-6 text-white dark:text-black"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -248,9 +248,9 @@ export default function ContactSection() {
                     />
                   </svg>
                 </div>
-                <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Email</p>
-                  <p className="text-lg font-medium text-black dark:text-white">
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs sm:text-sm hidden sm:block text-gray-600 dark:text-gray-400">Email</p>
+                  <p className="text-base md:text-lg font-medium text-black dark:text-white break-all sm:break-normal">
                     attanavaid@gmail.com
                   </p>
                 </div>
