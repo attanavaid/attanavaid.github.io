@@ -105,8 +105,16 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-roboto), sans-serif; /* Roboto for body text */
 }
+
+/* Headers use Montserrat */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 700; /* Bold for headers */
+}
+
+/* Workbench is applied via className in HeroSection */
 
 /* Smooth scrolling */
 html {
