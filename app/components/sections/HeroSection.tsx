@@ -162,7 +162,7 @@ export default function HeroSection({ scrollY, currentRole, roles }: HeroSection
             </h2>
           </div>
           <div className="overflow-hidden">
-            <h1 className="animate-slide-up-delay text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+            <h1 className="animate-slide-up-delay text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]" style={{ fontFamily: 'var(--font-space-mono)' }}>
               <span className="inline-block">Atta</span>{" "}
               <span className="inline-block">Navaid</span>
             </h1>
@@ -171,6 +171,7 @@ export default function HeroSection({ scrollY, currentRole, roles }: HeroSection
             <div
               key={currentRole}
               className="animate-fade-in-up text-2xl sm:text-3xl md:text-4xl font-light text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+              style={{ fontFamily: 'var(--font-space-mono)' }}
             >
               {roles[currentRole]}
             </div>
