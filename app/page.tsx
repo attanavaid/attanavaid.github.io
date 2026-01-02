@@ -8,6 +8,7 @@ import SkillsSection from "./components/sections/SkillsSection";
 import ProjectsSection from "./components/sections/ProjectsSection";
 import LanguagesSection from "./components/sections/LanguagesSection";
 import ContactSection from "./components/sections/ContactSection";
+import Footer from "./components/sections/Footer";
 import { workData } from "@/data/workData";
 import { educationData } from "@/data/educationData";
 
@@ -63,6 +64,7 @@ export default function Home() {
       <ProjectsSection sectionOffset={sectionOffsets.projects || 0} />
       <LanguagesSection sectionOffset={sectionOffsets.languages || 0} />
       <ContactSection />
+      <Footer />
     </div>
   );
 }
