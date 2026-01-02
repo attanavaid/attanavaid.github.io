@@ -1,17 +1,52 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { ThemeScript } from "./components/ThemeScript";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+// Montserrat - For headers (variable font for all weights)
+const montserrat = localFont({
+  src: "./fonts/Montserrat/Montserrat-VariableFont_wght.ttf",
+  variable: "--font-montserrat",
+  display: "swap",
+  preload: true, // Preload headers since they're critical
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+// Roboto - For body text (variable font for width and weight)
+const roboto = localFont({
+  src: "./fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf",
+  variable: "--font-roboto",
+  display: "swap",
+  preload: true, // Preload body font since it's used everywhere
+});
+
+// Space Mono - For name and profession in hero section
+const spaceMono = localFont({
+  src: [
+    {
+      path: "./fonts/Space_Mono/SpaceMono-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Space_Mono/SpaceMono-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Space_Mono/SpaceMono-Italic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "./fonts/Space_Mono/SpaceMono-BoldItalic.ttf",
+      weight: "700",
+      style: "italic",
+    },
+  ],
+  variable: "--font-space-mono",
+  display: "swap",
+  preload: true, // Preload since it's in the hero section (above the fold)
 });
 
 export const metadata: Metadata = {
@@ -70,14 +105,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Preconnect to Google Fonts for faster loading */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* DNS prefetch for external resources */}
+        {/* DNS prefetch for external resources (GitHub API for potential future features) */}
         <link rel="dns-prefetch" href="https://api.github.com" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${montserrat.variable} ${roboto.variable} ${spaceMono.variable} antialiased`}
       >
         <ThemeScript />
         <ThemeProvider>
