@@ -8,16 +8,22 @@ const nextConfig: NextConfig = {
     // Add device sizes for responsive images
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // Cache optimized images for 1 year
-    minimumCacheTTL: 31536000,
+    // Cache optimized images for 1 year (production only)
+    // In development, use default (60 seconds) to prevent caching issues
+    minimumCacheTTL: process.env.NODE_ENV === 'production' ? 31536000 : 60,
     // Enable remote patterns if needed (currently not using remote images)
     remotePatterns: [],
     // Unoptimized: false means images will be optimized by Next.js
     unoptimized: false,
   },
 
-  // Add headers for static asset caching
+  // Add headers for static asset caching (only in production)
   async headers() {
+    // Disable aggressive caching in development to prevent hydration issues
+    if (process.env.NODE_ENV === 'development') {
+      return [];
+    }
+
     return [
       {
         source: '/:path*',
