@@ -80,24 +80,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-32 px-6 bg-linear-to-b from-white to-gray-50 dark:from-black dark:to-gray-950 overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-20 w-72 h-72 border-2 border-gray-300 dark:border-gray-700 opacity-20 rotate-45 animate-pulse"></div>
-        <div className="absolute bottom-20 left-20 w-96 h-96 border-2 border-gray-300 dark:border-gray-700 opacity-10 rounded-full"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full">
-          <div
-            className="absolute inset-0 opacity-[0.015] dark:opacity-[0.02]"
-            style={{
-              backgroundImage: `
-                radial-gradient(circle, gray 1px, transparent 1px)
-              `,
-              backgroundSize: "40px 40px",
-            }}
-          />
-        </div>
-      </div>
-
+    <section id="contact" className="relative py-32 px-6 overflow-hidden">
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">

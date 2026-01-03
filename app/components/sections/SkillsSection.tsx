@@ -16,7 +16,7 @@ export default function SkillsSection({ sectionOffset }: SkillsSectionProps) {
   const skillsHeaderRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="skills" className="relative py-32 px-6 bg-white dark:bg-black overflow-hidden">
+    <section id="skills" className="relative py-32 px-6 overflow-hidden">
       {/* Subtle Parallax Background for Skills */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div

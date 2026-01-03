@@ -45,7 +45,7 @@ export default function ProjectsSection({ sectionOffset }: ProjectsSectionProps)
   };
 
   return (
-    <section id="projects" className="relative py-32 px-6 bg-gray-50 dark:bg-gray-950 overflow-hidden">
+    <section id="projects" className="relative py-32 px-6 overflow-hidden">
       {/* Subtle Parallax Background for Projects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div

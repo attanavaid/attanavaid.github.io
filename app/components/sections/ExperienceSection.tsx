@@ -14,7 +14,7 @@ export default function ExperienceSection({ sectionOffset, workData, educationDa
   const [timelineView, setTimelineView] = useState<"work" | "education">("work");
 
   return (
-    <section id="experience" className="relative py-32 px-6 bg-white dark:bg-black overflow-hidden">
+    <section id="experience" className="relative py-32 px-6 overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
@@ -35,7 +35,7 @@ export default function ExperienceSection({ sectionOffset, workData, educationDa
           </h2>
           
           {/* Smaller Toggle Buttons with Equal Width */}
-          <div className="relative inline-flex items-center justify-center gap-2 mb-12 p-1 bg-white dark:bg-black rounded-full border-2 border-gray-300 dark:border-gray-700">
+          <div className="relative inline-flex items-center justify-center gap-2 mb-12 p-1 bg-white/80 dark:bg-black/80 backdrop-blur-sm rounded-full border-2 border-gray-300 dark:border-gray-700">
             {/* Sliding Background Circle - Smooth Animation */}
             <div
               className="absolute top-1 bottom-1 rounded-full bg-black dark:bg-white shadow-md transition-all duration-500 ease-in-out"
