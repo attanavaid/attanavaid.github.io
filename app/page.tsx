@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
-import HeroSection from "./components/sections/HeroSection";
+import AnimatedGradientBackground from "./components/AnimatedGradientBackground";
+import HeroSection3D from "./components/sections/HeroSection3D";
 import ExperienceSection from "./components/sections/ExperienceSection";
 import SkillsSection from "./components/sections/SkillsSection";
 import ProjectsSection from "./components/sections/ProjectsSection";
@@ -52,18 +53,26 @@ export default function Home() {
   }, [roles.length]);
 
   return (
-    <div className="relative overflow-hidden bg-white dark:bg-black">
-      <Navbar />
-      <HeroSection scrollY={scrollY} currentRole={currentRole} roles={roles} />
-      <ExperienceSection 
-        sectionOffset={sectionOffsets.experience || 0}
-        workData={workData}
-        educationData={educationData}
-      />
-      <SkillsSection sectionOffset={sectionOffsets.skills || 0} />
-      <ProjectsSection sectionOffset={sectionOffsets.projects || 0} />
-      <LanguagesSection sectionOffset={sectionOffsets.languages || 0} />
-      <ContactSection />
+    <div className="relative overflow-hidden">
+      {/* Animated gradient background spanning hero to contact */}
+      <AnimatedGradientBackground />
+      
+      {/* Content wrapper with sections */}
+      <div className="relative z-10">
+        <Navbar />
+        <HeroSection3D scrollY={scrollY} currentRole={currentRole} roles={roles} />
+        <ExperienceSection 
+          sectionOffset={sectionOffsets.experience || 0}
+          workData={workData}
+          educationData={educationData}
+        />
+        <SkillsSection sectionOffset={sectionOffsets.skills || 0} />
+        <ProjectsSection sectionOffset={sectionOffsets.projects || 0} />
+        <LanguagesSection sectionOffset={sectionOffsets.languages || 0} />
+        <ContactSection />
+      </div>
+      
+      {/* Footer with its own background */}
       <Footer />
     </div>
   );
