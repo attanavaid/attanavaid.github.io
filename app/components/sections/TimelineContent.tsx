@@ -27,13 +27,13 @@ export default function TimelineContent({
     <div className={`animate-fade-in-up flex flex-col ${isEducation ? "h-full" : ""}`}>
       {/* Logo on top - Left aligned */}
       <div className="mb-4 flex justify-start">
-        <div className="relative h-8 w-auto">
+        <div className="relative h-10 w-auto">
           <Image
             src={data.icon}
             alt={data.title}
             width={100}
             height={32}
-            className="h-8 w-auto object-contain object-left"
+            className={`h-10 w-auto object-contain object-left ${data.icon === "/work/lp2.png" ? "dark:bg-transparent bg-gray-600 rounded-lg p-1" : ""}`}
           />
         </div>
       </div>
