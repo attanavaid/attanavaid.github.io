@@ -55,12 +55,10 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
   const pathEndRef = useRef<number>(0);
   const baseRotationRef = useRef({ x: 0, y: 0, z: 0 });
   
-  // Mouse interaction state
-  const mouseRef = useRef({ x: 0, y: 0 });
+  // Mouse interaction state (for drag rotation only)
   const isDraggingRef = useRef(false);
   const lastMousePosRef = useRef({ x: 0, y: 0 });
   const rotationVelocityRef = useRef({ x: 0, y: 0 });
-  const cursorRotationRef = useRef({ x: 0, y: 0 });
 
   // Update scroll ref without re-running effect
   useEffect(() => {
@@ -146,11 +144,11 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
         
         const knife = gltf.scene;
         
-        // Calculate scale for the model
+        // Calculate scale for the model (enlarged for both themes)
         const box = new THREE.Box3().setFromObject(knife);
         const size = box.getSize(new THREE.Vector3());
         const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 2.5 / maxDim;
+        const scale = 4.5 / maxDim; // Increased from 2.5 to 4.5
         
         // Apply scale and center
         knife.scale.multiplyScalar(scale);
@@ -205,16 +203,8 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
       }
     );
 
-    // Mouse interaction handlers
+    // Mouse interaction handlers (drag rotation only, no cursor response)
     const handleMouseMove = (e: MouseEvent) => {
-      // Normalize mouse position to -1 to 1 range
-      mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
-      
-      // Update cursor-based rotation (subtle effect)
-      cursorRotationRef.current.x = mouseRef.current.y * 0.3;
-      cursorRotationRef.current.y = mouseRef.current.x * 0.3;
-      
       // Handle drag rotation (only if dragging started on canvas)
       if (isDraggingRef.current) {
         const deltaX = e.clientX - lastMousePosRef.current.x;
@@ -250,7 +240,7 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
       }
     };
 
-    const handleMouseUp = (e: MouseEvent) => {
+    const handleMouseUp = () => {
       if (isDraggingRef.current) {
         isDraggingRef.current = false;
         const canvasElement = mountRef.current;
@@ -260,7 +250,7 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
       }
     };
 
-    const handleMouseLeave = (e: MouseEvent) => {
+    const handleMouseLeave = () => {
       if (isDraggingRef.current) {
         isDraggingRef.current = false;
         const canvasElement = mountRef.current;
@@ -316,14 +306,17 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
         knife.position.y = pathY + floatY;
         knife.position.z = pathZ + floatZ;
         
-        // Apply rotation: base + cursor + drag with momentum
-        // Apply momentum decay (friction)
+        // Scroll-based rotation: rotate based on scroll progress on X-axis
+        // Full rotation (2π) over the scroll path
+        const scrollRotationX = scrollProgress * Math.PI * 2; // One full rotation as user scrolls
+        
+        // Apply momentum decay (friction) for drag rotation
         rotationVelocityRef.current.x *= 0.95;
         rotationVelocityRef.current.y *= 0.95;
         
-        // Combine all rotations
-        knife.rotation.x = baseRotationRef.current.x + cursorRotationRef.current.x + rotationVelocityRef.current.x;
-        knife.rotation.y = baseRotationRef.current.y + cursorRotationRef.current.y + rotationVelocityRef.current.y;
+        // Combine rotations: base + scroll + drag with momentum
+        knife.rotation.x = baseRotationRef.current.x + scrollRotationX + rotationVelocityRef.current.x;
+        knife.rotation.y = baseRotationRef.current.y + rotationVelocityRef.current.y;
         knife.rotation.z = baseRotationRef.current.z;
         
         // Scale pulsing
@@ -364,15 +357,10 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
       isMounted = false;
       
       // Remove mouse event listeners
+      document.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
-      
-      // Remove canvas-specific listeners
-      const canvasElement = mountRef.current;
-      if (canvasElement) {
-        canvasElement.removeEventListener('mousedown', handleMouseDown);
-        canvasElement.removeEventListener('mouseleave', handleMouseLeave);
-      }
+      window.removeEventListener('mouseleave', handleMouseLeave);
       
       window.removeEventListener("resize", handleResize);
       
