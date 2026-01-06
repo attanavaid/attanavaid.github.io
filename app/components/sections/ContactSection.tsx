@@ -110,7 +110,7 @@ export default function ContactSection() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full border-2 border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white"
+                  className="w-full border-2 border-gray-400 dark:border-gray-600 focus:border-black dark:focus:border-white placeholder:text-gray-500 dark:placeholder:text-gray-400 placeholder:font-medium"
                   placeholder="Your name"
                 />
               </div>
@@ -129,7 +129,7 @@ export default function ContactSection() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full border-2 border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white"
+                  className="w-full border-2 border-gray-400 dark:border-gray-600 focus:border-black dark:focus:border-white placeholder:text-gray-500 dark:placeholder:text-gray-400 placeholder:font-medium"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -148,7 +148,7 @@ export default function ContactSection() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full border-2 border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white"
+                  className="w-full border-2 border-gray-400 dark:border-gray-600 focus:border-black dark:focus:border-white placeholder:text-gray-500 dark:placeholder:text-gray-400 placeholder:font-medium"
                   placeholder="What's this about?"
                 />
               </div>
@@ -167,7 +167,7 @@ export default function ContactSection() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full border-2 border-gray-300 dark:border-gray-700 focus:border-black dark:focus:border-white resize-none"
+                  className="w-full border-2 border-gray-400 dark:border-gray-600 focus:border-black dark:focus:border-white resize-none placeholder:text-gray-500 dark:placeholder:text-gray-400 placeholder:font-medium"
                   placeholder="Tell me about your project or just say hello..."
                 />
               </div>
