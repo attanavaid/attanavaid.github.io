@@ -18,7 +18,7 @@ export default function Home() {
   const [currentRole, setCurrentRole] = useState(0);
   const [sectionOffsets, setSectionOffsets] = useState<Record<string, number>>({});
 
-  const roles = ["Developer", "Designer", "Creator", "Innovator"];
+  const roles = ["Frontend", "Software", "Fullstack"];
 
   useEffect(() => {
     const handleScroll = () => {
