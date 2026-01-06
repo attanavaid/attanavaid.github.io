@@ -88,7 +88,7 @@ export default function ContactSection() {
           </h2>
           <div className="w-24 h-1 bg-black dark:bg-white mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Have a project in mind or want to collaborate? I&apos;d love to hear from you.
+            Your time zone doesn&apos;t matter. I can adapt my schedule to match yours!
           </p>
         </div>
 
