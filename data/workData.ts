@@ -10,6 +10,7 @@ export const workData: WorkExperience[] = [
     description: [
       "Build and enhance production features across the frontend and backend of learnprompting.org, a large-scale educational platform serving a global audience",
       "Develop and maintain React and Next.js components using TypeScript, Tailwind CSS, and MDX, optimizing for performance, SEO, and search discoverability",
+      "Implement and manage analytics tracking using Google Tag Manager and Mixpanel to monitor user behavior, track conversions, and generate insights for data-driven decision making",
       "Contribute to CI/CD pipeline through GitHub pull requests, resolving merge conflicts, and implementing code review feedback in an agile development environment",
       "Debug and resolve production issues by tracing component logic, data flow, and build output, improving system stability and user experience",
       "Collaborate asynchronously in a fast-paced startup environment, balancing feature development, bug fixes, and continuous site improvements",
@@ -20,10 +21,14 @@ export const workData: WorkExperience[] = [
       { name: "React", logo: "react.svg" },
       { name: "TypeScript", logo: "typescript.svg" },
       { name: "Markdown", logo: "markdown.svg" },
+      { name: "MDX", logo: "mdx.svg" },
+      { name: "YAML", logo: "yaml.svg" },
       { name: "Tailwind", logo: "tailwindcss.svg" },
       { name: "GitHub", logo: "github.svg" },
       { name: "Vercel", logo: "vercel.svg" },
       { name: "Google Search Console", logo: "googlesearchconsole.svg" },
+      { name: "Google Tag Manager", logo: "googletagmanager.svg" },
+      { name: "Mixpanel", logo: "mixpanel.svg" },
     ],
   },
   {
