@@ -38,6 +38,7 @@ export const skillsData: Skill[] = [
       { name: "Tailwind", logo: "/skills/tech/tailwindcss.svg" },
       { name: "Bootstrap", logo: "/skills/tech/bootstrap.svg" },
       { name: "Material UI", logo: "/skills/tech/mui.svg" },
+      { name: "Shadcn/ui", logo: "/skills/tech/shadcnui.svg" },
       { name: "Sass", logo: "/skills/tech/sass.svg" },
     ],
   },
@@ -79,7 +80,7 @@ export const skillsData: Skill[] = [
     ],
   },
   {
-    icon: "/skills/hardhat.png", // TODO: Change to the correct icon
+    icon: "/skills/hardhat.png",
     name: "Web 3.0 Development",
     tech: [
       { name: "Solidity", logo: "/skills/tech/solidity.svg" },
@@ -112,12 +113,21 @@ export const skillsData: Skill[] = [
     ],
   },
   {
-    icon: "/skills/photoshop.png", // TODO: Change to the correct icon
+    icon: "/skills/photoshop.png",
     name: "UI/UX Design",
     tech: [
       { name: "Adobe Photoshop", logo: "/skills/tech/adobe-photoshop.svg" },
       { name: "Figma", logo: "/skills/tech/figma.svg" },
       { name: "Adobe Illustrator", logo: "/skills/tech/adobe-illustrator.svg" },
+    ],
+  },
+  {
+    icon: "/skills/google-tag-manager.png",
+    name: "Analytics & Tracking",
+    tech: [
+      { name: "Google Tag Manager", logo: "/skills/tech/googletagmanager.svg" },
+      { name: "Mixpanel", logo: "/skills/tech/mixpanel.svg" },
+      { name: "Google Analytics", logo: "/skills/tech/googleanalytics.svg" },
     ],
   },
   {
