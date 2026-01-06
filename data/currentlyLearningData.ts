@@ -29,4 +29,12 @@ export const currentlyLearningData: Skill[] = [
       { name: "Kubernetes", logo: "/skills/tech/kubernetes.svg" },
     ],
   },
+  {
+    icon: "/skills/rust.png",
+    name: "Systems Programming Languages",
+    tech: [
+      { name: "Rust", logo: "/skills/tech/rust.svg" },
+      { name: "Go", logo: "/skills/tech/go.svg" },
+    ],
+  },
 ];
