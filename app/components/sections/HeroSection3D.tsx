@@ -5,6 +5,8 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { useTheme } from "../ThemeProvider";
 import Image from "next/image";
+import { Dock, DockIcon } from "@/app/components/ui/dock";
+import { MailIcon } from "lucide-react";
 
 interface HeroSection3DProps {
   currentRole: number;
@@ -18,12 +20,10 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
   const mountRef = useRef<HTMLDivElement>(null);
   const isDarkRef = useRef(isDark);
   
-  // Update ref when theme changes
   useEffect(() => {
     isDarkRef.current = isDark;
   }, [isDark]);
   
-  // Shared function to update model materials based on theme
   const updateMaterials = useCallback((model: THREE.Object3D, darkMode: boolean) => {
     model.traverse((child) => {
       if (child instanceof THREE.Mesh) {
@@ -32,12 +32,10 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
           child.material.roughness = 0.2;
           
           if (darkMode) {
-            // Dark mode: Dark/black model
             child.material.color = new THREE.Color(0x1a1a1a);
             child.material.emissive = new THREE.Color(0x000000);
             child.material.emissiveIntensity = 0;
           } else {
-            // Light mode: White/light model
             child.material.color = new THREE.Color(0xffffff);
             child.material.emissive = new THREE.Color(0xffffff);
             child.material.emissiveIntensity = 1;
@@ -46,22 +44,22 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
       }
     });
   }, []);
+
   const sceneRef = useRef<THREE.Scene | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const animationFrameRef = useRef<number | null>(null);
-  const knifeRef = useRef<THREE.Object3D | null>(null);
+  const logoRef = useRef<THREE.Object3D | null>(null);
   const scrollYRef = useRef<number>(0);
   const pathStartRef = useRef<number>(0);
   const pathEndRef = useRef<number>(0);
   const baseRotationRef = useRef({ x: 0, y: 0, z: 0 });
+  const baseScaleRef = useRef<number>(1);
   
-  // Mouse interaction state (for drag rotation only)
   const isDraggingRef = useRef(false);
   const lastMousePosRef = useRef({ x: 0, y: 0 });
   const rotationVelocityRef = useRef({ x: 0, y: 0 });
 
-  // Update scroll ref without re-running effect
   useEffect(() => {
     scrollYRef.current = scrollY;
   }, [scrollY]);
@@ -71,11 +69,9 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
 
     let isMounted = true;
 
-    // Scene setup
     const scene = new THREE.Scene();
     sceneRef.current = scene;
 
-    // Camera setup
     const camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
@@ -86,22 +82,21 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
     camera.lookAt(0, 0, 0);
     cameraRef.current = camera;
 
-    // Renderer setup
     const renderer = new THREE.WebGLRenderer({ 
       antialias: true,
       alpha: true,
       powerPreference: "high-performance"
     });
+
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = false; // Disable shadows to save memory
+    renderer.shadowMap.enabled = false;
     renderer.domElement.style.display = 'block';
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
     mountRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // Lighting - white lights only to avoid color tinting
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
     scene.add(ambientLight);
 
@@ -109,16 +104,6 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
 
-    // White point lights instead of colored ones
-    const pointLight1 = new THREE.PointLight(0xffffff, 1, 100);
-    pointLight1.position.set(-3, 2, 3);
-    scene.add(pointLight1);
-
-    const pointLight2 = new THREE.PointLight(0xffffff, 1, 100);
-    pointLight2.position.set(3, -2, 3);
-    scene.add(pointLight2);
-
-    // Calculate path from hero to contact section
     const calculatePath = () => {
       const heroSection = document.getElementById('hero');
       const contactSection = document.getElementById('contact');
@@ -134,7 +119,6 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
     
     calculatePath();
 
-    // Load Cyberpunk Knife Model
     const loader = new GLTFLoader();
     const modelPath = "/models/logo.glb";
     
@@ -143,75 +127,39 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
       (gltf) => {
         if (!isMounted) return;
         
-        const knife = gltf.scene;
+        const logo = gltf.scene;
         
-        // Calculate scale for the model (enlarged for both themes)
-        const box = new THREE.Box3().setFromObject(knife);
+        const box = new THREE.Box3().setFromObject(logo);
         const size = box.getSize(new THREE.Vector3());
         const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 4.5 / maxDim; // Increased from 2.5 to 4.5
+        const scale = 4.5 / maxDim;
         
-        // Apply scale and center
-        knife.scale.multiplyScalar(scale);
-        const knifeBox = new THREE.Box3().setFromObject(knife);
-        const knifeCenter = knifeBox.getCenter(new THREE.Vector3());
-        knife.position.sub(knifeCenter);
+        baseScaleRef.current = scale;
         
-        // Starting position in hero section
-        knife.position.set(0, 1, 0);
+        logo.scale.multiplyScalar(scale);
+        const logoBox = new THREE.Box3().setFromObject(logo);
+        const logoCenter = logoBox.getCenter(new THREE.Vector3());
+        logo.position.sub(logoCenter);
         
-        // Set initial/base rotation/orientation (adjust these values to fix the initial orientation)
-        // X, Y, Z rotations in radians (Math.PI = 180 degrees)
-        // This is the base orientation that will be preserved
-        baseRotationRef.current = { x: Math.PI / 2, y: 0, z: 0 }; // Adjust these values
-        // Common adjustments:
-        // baseRotationRef.current = { x: 0, y: Math.PI / 2, z: 0 }; // Rotate 90 degrees on Y axis
-        // baseRotationRef.current = { x: Math.PI / 2, y: 0, z: 0 }; // Rotate 90 degrees on X axis
-        // baseRotationRef.current = { x: 0, y: 0, z: Math.PI / 2 }; // Rotate 90 degrees on Z axis
-        // baseRotationRef.current = { x: Math.PI / 2, y: Math.PI / 2, z: 0 }; // Combine rotations
+        logo.position.set(0, 1, 0);
+        baseRotationRef.current = { x: Math.PI / 2, y: 0, z: 0 };
         
-        // Apply theme-based materials (using current theme at mount time)
-        updateMaterials(knife, isDarkRef.current);
+        updateMaterials(logo, isDarkRef.current);
         
-        scene.add(knife);
-        knifeRef.current = knife;
-        console.log("Cyberpunk knife loaded successfully");
+        scene.add(logo);
+        logoRef.current = logo;
       },
-      (progress) => {
-        if (progress.total > 0) {
-          const percent = (progress.loaded / progress.total) * 100;
-          console.log(`Knife loading: ${percent.toFixed(2)}%`);
-        }
-      },
+      undefined,
       (error) => {
-        console.error("Error loading knife model:", error);
-        if (!isMounted) return;
-        
-        // Fallback: Create simple geometry
-        const knifeGeometry = new THREE.BoxGeometry(0.3, 1.5, 0.1);
-        const knifeMaterial = new THREE.MeshStandardMaterial({
-          color: 0x4a9eff,
-          metalness: 0.8,
-          roughness: 0.2,
-          emissive: 0x1a3a5c,
-          emissiveIntensity: 0.5,
-        });
-        const knife = new THREE.Mesh(knifeGeometry, knifeMaterial);
-        knife.position.set(0, 1, 0);
-        scene.add(knife);
-        knifeRef.current = knife;
-        console.log("Using fallback knife geometry");
+        console.error("Error loading logo model:", error);
       }
     );
 
-    // Mouse interaction handlers (drag rotation only, no cursor response)
     const handleMouseMove = (e: MouseEvent) => {
-      // Handle drag rotation (only if dragging started on canvas)
       if (isDraggingRef.current) {
         const deltaX = e.clientX - lastMousePosRef.current.x;
         const deltaY = e.clientY - lastMousePosRef.current.y;
         
-        // Calculate rotation velocity based on drag speed
         const sensitivity = 0.005;
         rotationVelocityRef.current.y += deltaX * sensitivity;
         rotationVelocityRef.current.x -= deltaY * sensitivity;
@@ -222,20 +170,16 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
     };
 
     const handleMouseDown = (e: MouseEvent) => {
-      // Only start dragging if clicking directly on the WebGL canvas element
       const target = e.target as HTMLElement;
       
-      // Check if the click is on the actual canvas element (not the container div)
       if (target.tagName === 'CANVAS') {
         isDraggingRef.current = true;
         lastMousePosRef.current.x = e.clientX;
         lastMousePosRef.current.y = e.clientY;
-        // Change cursor to grabbing
         const canvasElement = mountRef.current;
         if (canvasElement) {
           canvasElement.style.cursor = 'grabbing';
         }
-        // Prevent default only when dragging the canvas
         e.preventDefault();
         e.stopPropagation();
       }
@@ -261,14 +205,11 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
       }
     };
 
-    // Add event listeners
-    // Use document for mousedown to catch canvas clicks, but check target
     document.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
     window.addEventListener('mouseleave', handleMouseLeave);
 
-    // Animation loop
     let time = 0;
     const animate = () => {
       if (!isMounted) return;
@@ -276,14 +217,11 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
       animationFrameRef.current = requestAnimationFrame(animate);
       time += 0.01;
 
-      // Calculate scroll progress
       const pathLength = pathEndRef.current - pathStartRef.current;
       const scrollProgress = Math.max(0, Math.min(1, (scrollYRef.current - pathStartRef.current) / pathLength));
       
-      // Animate knife
-      const knife = knifeRef.current;
-      if (knife) {
-        // Path coordinates
+      const logo = logoRef.current;
+      if (logo) {
         const startX = 0;
         const startY = 1;
         const startZ = 0;
@@ -292,57 +230,43 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
         const endY = -6;
         const endZ = 2;
         
-        // Curved path
         const pathX = startX + (endX - startX) * scrollProgress;
         const pathY = startY + (endY - startY) * scrollProgress + Math.sin(scrollProgress * Math.PI) * 1.5;
         const pathZ = startZ + (endZ - startZ) * scrollProgress;
         
-        // Floating animation
         const floatY = Math.sin(time * 0.8) * 0.3;
         const floatX = Math.cos(time * 0.6) * 0.2;
         const floatZ = Math.sin(time * 0.7) * 0.15;
         
-        // Apply position
-        knife.position.x = pathX + floatX;
-        knife.position.y = pathY + floatY;
-        knife.position.z = pathZ + floatZ;
+        logo.position.x = pathX + floatX;
+        logo.position.y = pathY + floatY;
+        logo.position.z = pathZ + floatZ;
         
-        // Scroll-based rotation: rotate based on scroll progress on X-axis
-        // Full rotation (2π) over the scroll path
-        const scrollRotationX = scrollProgress * Math.PI * 2; // One full rotation as user scrolls
+        const scrollRotationX = scrollProgress * Math.PI * 2;
         
-        // Apply momentum decay (friction) for drag rotation
         rotationVelocityRef.current.x *= 0.95;
         rotationVelocityRef.current.y *= 0.95;
         
-        // Combine rotations: base + scroll + drag with momentum
-        knife.rotation.x = baseRotationRef.current.x + scrollRotationX + rotationVelocityRef.current.x;
-        knife.rotation.y = baseRotationRef.current.y + rotationVelocityRef.current.y;
-        knife.rotation.z = baseRotationRef.current.z;
+        logo.rotation.x = baseRotationRef.current.x + scrollRotationX + rotationVelocityRef.current.x;
+        logo.rotation.y = baseRotationRef.current.y + rotationVelocityRef.current.y;
+        logo.rotation.z = baseRotationRef.current.z;
         
-        // Scale pulsing
         const pulseScale = 1 + Math.sin(time * 2) * 0.05;
-        knife.scale.setScalar(pulseScale);
+        logo.scale.setScalar(baseScaleRef.current * pulseScale);
         
-        // Camera follows knife
         if (cameraRef.current) {
-          cameraRef.current.position.x += (knife.position.x * 0.3 - cameraRef.current.position.x) * 0.05;
-          cameraRef.current.position.y += (knife.position.y * 0.3 + 2 - cameraRef.current.position.y) * 0.05;
+          cameraRef.current.position.x += (logo.position.x * 0.3 - cameraRef.current.position.x) * 0.05;
+          cameraRef.current.position.y += (logo.position.y * 0.3 + 2 - cameraRef.current.position.y) * 0.05;
           cameraRef.current.position.z = 5;
-          cameraRef.current.lookAt(knife.position.x, knife.position.y, knife.position.z);
+          cameraRef.current.lookAt(logo.position.x, logo.position.y, logo.position.z);
         }
       }
-
-      // Update lights (keep intensity constant to avoid color shifts)
-      pointLight1.intensity = 0.2;
-      pointLight2.intensity = 0.2;
 
       renderer.render(scene, camera);
     };
 
     animate();
     
-    // Handle resize
     const handleResize = () => {
       if (!isMounted || !cameraRef.current || !rendererRef.current) return;
       cameraRef.current.aspect = window.innerWidth / window.innerHeight;
@@ -353,11 +277,9 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
 
     window.addEventListener("resize", handleResize);
 
-    // Cleanup
     return () => {
       isMounted = false;
       
-      // Remove mouse event listeners
       document.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
@@ -370,9 +292,8 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
         animationFrameRef.current = null;
       }
 
-      // Dispose knife
-      if (knifeRef.current) {
-        knifeRef.current.traverse((child) => {
+      if (logoRef.current) {
+        logoRef.current.traverse((child) => {
           if (child instanceof THREE.Mesh) {
             if (child.geometry) child.geometry.dispose();
             if (child.material instanceof THREE.Material) {
@@ -382,13 +303,12 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
             }
           }
         });
-        if (sceneRef.current && knifeRef.current.parent) {
-          sceneRef.current.remove(knifeRef.current);
+        if (sceneRef.current && logoRef.current.parent) {
+          sceneRef.current.remove(logoRef.current);
         }
-        knifeRef.current = null;
+        logoRef.current = null;
       }
 
-      // Dispose renderer
       if (rendererRef.current) {
         const mount = mountRef.current;
         if (mount && rendererRef.current.domElement.parentNode === mount) {
@@ -398,7 +318,6 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
         rendererRef.current = null;
       }
 
-      // Clear scene
       if (sceneRef.current) {
         while (sceneRef.current.children.length > 0) {
           sceneRef.current.remove(sceneRef.current.children[0]);
@@ -406,14 +325,12 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
         sceneRef.current = null;
       }
     };
-  }, [updateMaterials]); // Only run once on mount (updateMaterials is stable)
+  }, [updateMaterials]);
 
-  // Update materials when theme changes
   useEffect(() => {
-    if (!knifeRef.current) return;
-    updateMaterials(knifeRef.current, isDark);
+    if (!logoRef.current) return;
+    updateMaterials(logoRef.current, isDark);
   }, [isDark, updateMaterials]);
-
 
   return (
     <section id="hero" className="relative min-h-screen overflow-hidden">
@@ -453,7 +370,7 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
           </div>
           
           {/* About text - with padding to allow shadows to extend */}
-          <div className="px-4 sm:px-8 md:px-12 relative min-h-[120px] flex items-center justify-center">
+          <div className="px-4 sm:px-8 md:px-12 relative flex items-center justify-center">
             {/* Signature background design */}
             <div className="absolute -bottom-8 right-1/4 flex items-center justify-center pointer-events-none z-0">
               <Image
@@ -461,7 +378,7 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
                 alt="Signature"
                 width={500}
                 height={200}
-                className="w-auto h-24 object-contain dark:invert invert-0 opacity-50"
+                className="w-auto h-24 object-contain dark:invert invert-0 opacity-20"
                 priority={false}
               />
             </div>
@@ -480,6 +397,88 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
               </span>
               , specializing in <b>building scalable</b>, <b>production-ready apps</b> with experience delivering solutions across <b>frontend</b>, <b>backend</b>, and <b>data visualization</b>.
             </p>
+          </div>
+
+          <div className="relative">
+            <Dock direction="middle">
+              <DockIcon>
+                <a
+                  href="https://github.com/attanavaid"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-full h-full"
+                  aria-label="GitHub"
+                >
+                  <Image
+                    src="/skills/tech/github.svg"
+                    alt="GitHub"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 dark:invert"
+                  />
+                </a>
+              </DockIcon>
+              <DockIcon>
+                <a
+                  href="https://linkedin.com/in/attanavaid"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-full h-full"
+                  aria-label="LinkedIn"
+                >
+                  <Image
+                    src="/skills/tech/linkedin.svg"
+                    alt="LinkedIn"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 dark:invert"
+                  />
+                </a>
+              </DockIcon>
+              <DockIcon>
+                <a
+                  href="https://discordapp.com/users/302309055672614922"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-full h-full"
+                  aria-label="Discord"
+                >
+                  <Image
+                    src="/skills/tech/discord.svg"
+                    alt="Discord"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 dark:invert"
+                  />
+                </a>
+              </DockIcon>
+              <DockIcon>
+                <a
+                  href="https://api.whatsapp.com/send?phone=16673454340"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-full h-full"
+                  aria-label="WhatsApp"
+                >
+                  <Image
+                    src="/skills/tech/whatsapp.svg"
+                    alt="WhatsApp"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 dark:invert"
+                  />
+                </a>
+              </DockIcon>
+              <DockIcon>
+                <a
+                  href="mailto:attanavaid@gmail.com"
+                  className="flex items-center justify-center w-full h-full"
+                  aria-label="Email"
+                >
+                  <MailIcon className="w-6 h-6 text-black dark:text-white" />
+                </a>
+              </DockIcon>
+            </Dock>
           </div>
           
           {/* Single button - Download Resume */}
