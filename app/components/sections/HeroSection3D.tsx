@@ -4,6 +4,7 @@ import { useRef, useEffect, useCallback } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { useTheme } from "../ThemeProvider";
+import Image from "next/image";
 
 interface HeroSection3DProps {
   currentRole: number;
@@ -452,9 +453,32 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
           </div>
           
           {/* About text - with padding to allow shadows to extend */}
-          <div className="px-4 sm:px-8 md:px-12">
-            <p className={`animate-slide-up-delay-2 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed ${isDark ? 'text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]' : 'text-gray-800 drop-shadow-[0_2px_6px_rgba(255,255,255,0.8)]'}`}>
-              Full-stack developer based in the United States, specializing in building scalable, production-ready applications with experience delivering solutions across frontend, backend, and data visualization.
+          <div className="px-4 sm:px-8 md:px-12 relative min-h-[120px] flex items-center justify-center">
+            {/* Signature background design */}
+            <div className="absolute -bottom-8 right-1/4 flex items-center justify-center pointer-events-none z-0">
+              <Image
+                src="/signature.png"
+                alt="Signature"
+                width={500}
+                height={200}
+                className="w-auto h-24 object-contain dark:invert invert-0 opacity-50"
+                priority={false}
+              />
+            </div>
+            
+            <p className={`relative z-10 animate-slide-up-delay-2 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed ${isDark ? 'text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]' : 'text-gray-800 drop-shadow-[0_2px_6px_rgba(255,255,255,0.8)]'}`}>
+              Based in the{" "}
+              <span className="inline-flex items-center gap-1.5">
+                United States
+                <Image
+                  src="/us-flag.png"
+                  alt="United States flag"
+                  width={30}
+                  height={30}
+                  className="inline-block align-middle"
+                />
+              </span>
+              , specializing in <b>building scalable</b>, <b>production-ready apps</b> with experience delivering solutions across <b>frontend</b>, <b>backend</b>, and <b>data visualization</b>.
             </p>
           </div>
           
