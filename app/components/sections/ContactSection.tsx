@@ -7,8 +7,10 @@ import { Textarea } from "@/app/components/ui/textarea";
 import { Button } from "@/app/components/ui/button";
 import { Alert, AlertDescription } from "@/app/components/ui/alert";
 import Image from "next/image";
+import { useTheme } from "@/app/components/ThemeProvider";
 
 export default function ContactSection() {
+  const { resolvedTheme } = useTheme();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,6 +19,23 @@ export default function ContactSection() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const placeholders = {
+    dark: {
+      name: "Darth Vader",
+      email: "vader@sith.gov",
+      subject: "Join the Dark Side!",
+      message: "The Force is strong with this one. Join me and we will rule the galaxy...",
+    },
+    light: {
+      name: "Master Yoda",
+      email: "yoda@jedi.order",
+      subject: "May the Force be with you, hmm?",
+      message: "Always pass on what you have learned. Share your thoughts, you must...",
+    },
+  };
+
+  const currentPlaceholders = placeholders[resolvedTheme === "dark" ? "dark" : "light"];
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -112,7 +131,7 @@ export default function ContactSection() {
                   onChange={handleChange}
                   required
                   className="w-full border-2 border-gray-400 dark:border-gray-600 focus:border-black dark:focus:border-white placeholder:text-gray-500 dark:placeholder:text-gray-400 placeholder:font-medium"
-                  placeholder="Your name"
+                  placeholder={currentPlaceholders.name}
                 />
               </div>
 
@@ -131,7 +150,7 @@ export default function ContactSection() {
                   onChange={handleChange}
                   required
                   className="w-full border-2 border-gray-400 dark:border-gray-600 focus:border-black dark:focus:border-white placeholder:text-gray-500 dark:placeholder:text-gray-400 placeholder:font-medium"
-                  placeholder="your.email@example.com"
+                  placeholder={currentPlaceholders.email}
                 />
               </div>
 
@@ -150,7 +169,7 @@ export default function ContactSection() {
                   onChange={handleChange}
                   required
                   className="w-full border-2 border-gray-400 dark:border-gray-600 focus:border-black dark:focus:border-white placeholder:text-gray-500 dark:placeholder:text-gray-400 placeholder:font-medium"
-                  placeholder="What's this about?"
+                  placeholder={currentPlaceholders.subject}
                 />
               </div>
 
@@ -169,7 +188,7 @@ export default function ContactSection() {
                   required
                   rows={6}
                   className="w-full border-2 border-gray-400 dark:border-gray-600 focus:border-black dark:focus:border-white resize-none placeholder:text-gray-500 dark:placeholder:text-gray-400 placeholder:font-medium"
-                  placeholder="Tell me about your project or just say hello..."
+                  placeholder={currentPlaceholders.message}
                 />
               </div>
 
