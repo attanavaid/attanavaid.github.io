@@ -442,6 +442,23 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
               </DockIcon>
               <DockIcon>
                 <a
+                  href="https://www.youtube.com/@attanavaid"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-full h-full"
+                  aria-label="YouTube"
+                >
+                  <Image
+                    src="/skills/tech/youtube.svg"
+                    alt="YouTube"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 dark:invert"
+                  />
+                </a>
+              </DockIcon>
+{/*               <DockIcon>
+                <a
                   href="https://discordapp.com/users/302309055672614922"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -482,7 +499,7 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
                 >
                   <MailIcon className="w-6 h-6 text-black dark:text-white" />
                 </a>
-              </DockIcon>
+              </DockIcon> */}
             </Dock>
           </div>
           
