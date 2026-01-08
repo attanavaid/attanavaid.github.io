@@ -505,7 +505,7 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
           {/* Single button - Download Resume */}
           <div className="flex justify-center items-center pt-2 animate-fade-in px-4">
             <a
-              href="/resume/Resume.pdf"
+              href="/resume.pdf"
               download="Atta_Navaid_Resume.pdf"
               className={`px-8 py-4 border-2 font-medium rounded-full transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.5)] backdrop-blur-sm flex items-center gap-2 ${
                 isDark 
