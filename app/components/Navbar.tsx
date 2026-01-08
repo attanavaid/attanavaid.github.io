@@ -171,7 +171,7 @@ export default function Navbar() {
                 key={item.id}
                 href={`#${item.id}`}
                 onClick={(e) => handleNavClick(e, item.id)}
-                className={`block px-4 py-3 rounded-lg border-2 transition-all duration-300 ${
+                className={`block px-4 py-3 rounded-lg border-2 bg-white/95 dark:bg-black/95 transition-all duration-300 ${
                   activeSection === item.id
                     ? "border-black dark:border-white bg-gray-100 dark:bg-gray-900 text-black dark:text-white font-medium"
                     : "border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-black dark:hover:border-white hover:text-black dark:hover:text-white"
