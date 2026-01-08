@@ -54,7 +54,7 @@ export default function SkillsSection({ sectionOffset }: SkillsSectionProps) {
             return (
               <div
                 key={`${skill.name}-${index}`}
-                className={`group p-6 rounded-xl border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-black hover:border-black dark:hover:border-white hover:shadow-xl duration-300 skill-card ${
+                className={`group p-6 rounded-xl bg-white dark:bg-black hover:shadow-xl duration-300 skill-card ${
                   isExiting ? 'skill-card-exit' : 'skill-card-enter'
                 }`}
                 style={
