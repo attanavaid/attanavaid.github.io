@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Typewriter from "typewriter-effect";
 import { languagesData } from "@/data/languagesData";
+import { TextAnimate } from "@/app/components/ui/text-animate";
 
 interface LanguagesSectionProps {
   sectionOffset: number;
@@ -111,9 +112,13 @@ export default function LanguagesSection({ sectionOffset }: LanguagesSectionProp
 
       <div className="relative z-10 max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
+          <TextAnimate 
+            animation="blurIn" 
+            as="h2"
+            className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4"
+          >
             Languages
-          </h2>
+          </TextAnimate>
           <div className="w-24 h-1 bg-black dark:bg-white mx-auto"></div>
         </div>
 

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { skillsData } from "@/data/skillsData";
 import { currentlyLearningData } from "@/data/currentlyLearningData";
 import { getTechInfo } from "../utils/getTechInfo";
+import { TextAnimate } from "@/app/components/ui/text-animate";
 
 interface SkillsSectionProps {
   sectionOffset: number;
@@ -30,9 +31,13 @@ export default function SkillsSection({ sectionOffset }: SkillsSectionProps) {
       </div>
       <div className="relative z-10 max-w-7xl mx-auto">
         <div ref={skillsHeaderRef} className="text-center mb-20">
-          <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
+          <TextAnimate 
+            animation="blurIn" 
+            as="h2"
+            className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4"
+          >
             Skills
-          </h2>
+          </TextAnimate>
           <div className="w-24 h-1 bg-black dark:bg-white mx-auto"></div>
         </div>
         

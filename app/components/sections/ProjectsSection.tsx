@@ -7,6 +7,7 @@ import { projectsData } from "@/data/projectsData";
 import ProjectModal from "./ProjectModal";
 import { commonImages } from "../utils/imageImports";
 import { isVideoFile } from "../utils/videoUtils";
+import { TextAnimate } from "@/app/components/ui/text-animate";
 
 interface ProjectsSectionProps {
   sectionOffset: number;
@@ -59,9 +60,13 @@ export default function ProjectsSection({ sectionOffset }: ProjectsSectionProps)
       </div>
       <div className="relative z-10 max-w-7xl mx-auto">
         <div ref={projectsHeaderRef} className="text-center mb-20">
-          <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
+          <TextAnimate 
+            animation="blurIn" 
+            as="h2"
+            className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4"
+          >
             Projects
-          </h2>
+          </TextAnimate>
           <div className="w-24 h-1 bg-black dark:bg-white mx-auto"></div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

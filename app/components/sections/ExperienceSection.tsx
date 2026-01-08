@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { WorkExperience, Education } from "@/types";
 import ExperienceNodeWrapper from "./ExperienceNodeWrapper";
+import { TextAnimate } from "@/app/components/ui/text-animate";
 
 interface ExperienceSectionProps {
   sectionOffset: number;
@@ -30,9 +31,13 @@ export default function ExperienceSection({ sectionOffset, workData, educationDa
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* Section Header with Toggle */}
         <div className="text-center">
-          <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-8">
+          <TextAnimate 
+            animation="blurIn" 
+            as="h2"
+            className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-8"
+          >
             Experience
-          </h2>
+          </TextAnimate>
           
           {/* Smaller Toggle Buttons with Equal Width */}
           <div className="relative inline-flex items-center justify-center gap-2 mb-12 p-1 bg-white/80 dark:bg-black/80 backdrop-blur-sm rounded-full border-2 border-gray-300 dark:border-gray-700">
