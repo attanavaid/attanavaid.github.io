@@ -38,7 +38,6 @@ export default function SkillsSection({ sectionOffset }: SkillsSectionProps) {
           >
             Skills
           </TextAnimate>
-          <div className="w-24 h-1 bg-black dark:bg-white mx-auto"></div>
         </div>
         
         {/* Skills Grid - Show first 6 initially with smooth transitions */}

@@ -111,7 +111,7 @@ export default function ContactSection() {
           >
             Get In Touch
           </TextAnimate>
-          <div className="w-24 h-1 bg-black dark:bg-white mx-auto mb-6"></div>
+          
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Your time zone doesn&apos;t matter. I can adapt my schedule to match yours!
           </p>

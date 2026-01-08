@@ -119,7 +119,6 @@ export default function LanguagesSection({ sectionOffset }: LanguagesSectionProp
           >
             Languages
           </TextAnimate>
-          <div className="w-24 h-1 bg-black dark:bg-white mx-auto"></div>
         </div>
 
         {/* Typewriter Display Area */}
