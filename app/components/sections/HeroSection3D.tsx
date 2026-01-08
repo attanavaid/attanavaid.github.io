@@ -7,6 +7,7 @@ import { useTheme } from "../ThemeProvider";
 import Image from "next/image";
 import { Dock, DockIcon } from "@/app/components/ui/dock";
 import { MailIcon } from "lucide-react";
+import { Highlighter } from "@/app/components/ui/highlighter";
 
 interface HeroSection3DProps {
   currentRole: number;
@@ -384,7 +385,7 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
             </div>
             
             <p className={`relative z-10 animate-slide-up-delay-2 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed ${isDark ? 'text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]' : 'text-gray-800 drop-shadow-[0_2px_6px_rgba(255,255,255,0.8)]'}`}>
-              Based in the{" "}
+              Based in the&nbsp;
               <span className="inline-flex items-center gap-1.5">
                 United States
                 <Image
@@ -395,7 +396,11 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
                   className="inline-block align-middle"
                 />
               </span>
-              , specializing in <b>building scalable</b>, <b>production-ready apps</b> with experience delivering solutions across <b>frontend</b>, <b>backend</b>, and <b>data visualization</b>.
+              , specializing in&nbsp;
+              <Highlighter action="underline" color="#787878">
+                building scalable, production-ready apps
+              </Highlighter>
+              &nbsp;with experience delivering solutions across frontend, backend, and data visualization.
             </p>
           </div>
 
@@ -482,7 +487,7 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
           </div>
           
           {/* Single button - Download Resume */}
-          <div className="flex justify-center items-center pt-8 animate-fade-in px-4">
+          <div className="flex justify-center items-center pt-2 animate-fade-in px-4">
             <a
               href="/resume/Resume.pdf"
               download="Atta_Navaid_Resume.pdf"
