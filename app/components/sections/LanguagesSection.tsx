@@ -96,7 +96,7 @@ export default function LanguagesSection({ sectionOffset }: LanguagesSectionProp
   }, [cleanupTypewriters]);
 
   return (
-    <section id="languages" className="relative py-32 px-6 overflow-hidden">
+    <section id="languages" className="relative py-8 sm:py-12 md:py-18 lg:py-32 px-6 overflow-hidden">
       {/* Subtle Parallax Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div

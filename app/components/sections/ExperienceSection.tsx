@@ -14,7 +14,7 @@ export default function ExperienceSection({ sectionOffset, workData, educationDa
   const [timelineView, setTimelineView] = useState<"work" | "education">("work");
 
   return (
-    <section id="experience" className="relative py-32 px-6 overflow-hidden">
+    <section id="experience" className="relative py-8 sm:py-12 md:py-18 lg:py-32 px-6 overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div

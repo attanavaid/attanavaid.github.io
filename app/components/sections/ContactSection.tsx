@@ -81,7 +81,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-32 px-6 overflow-hidden">
+    <section id="contact" className="relative py-8 sm:py-12 md:py-18 lg:py-32 px-6 overflow-hidden">
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black dark:text-white mb-4">
