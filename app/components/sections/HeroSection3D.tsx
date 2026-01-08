@@ -6,7 +6,6 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { useTheme } from "../ThemeProvider";
 import Image from "next/image";
 import { Dock, DockIcon } from "@/app/components/ui/dock";
-import { MailIcon } from "lucide-react";
 import { Highlighter } from "@/app/components/ui/highlighter";
 
 interface HeroSection3DProps {
