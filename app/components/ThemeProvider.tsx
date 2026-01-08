@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, useCallback, useMemo } from "react";
 
-type Theme = "system" | "dark" | "light";
+type Theme = "dark" | "light";
 
 interface ThemeContextType {
   theme: Theme;
@@ -13,51 +13,25 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("system");
+  const [theme, setThemeState] = useState<Theme>("dark");
   const [mounted, setMounted] = useState(false);
-
-  // Get system preference
-  const getSystemTheme = useCallback((): "dark" | "light" => {
-    if (typeof window !== "undefined") {
-      return window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-    }
-    return "light";
-  }, []);
-
-  // Resolve the actual theme (system -> dark/light)
-  const resolveTheme = useCallback((currentTheme: Theme): "dark" | "light" => {
-    if (currentTheme === "system") {
-      return getSystemTheme();
-    }
-    return currentTheme;
-  }, [getSystemTheme]);
-
-  // Compute resolved theme
-  const resolvedTheme = useMemo(() => {
-    if (!mounted) return "light";
-    return resolveTheme(theme);
-  }, [theme, resolveTheme, mounted]);
 
   // Apply theme to document
   const applyTheme = useCallback((currentTheme: Theme) => {
     if (typeof window === "undefined") return;
 
     const root = window.document.documentElement;
-    const resolved = resolveTheme(currentTheme);
-
     root.classList.remove("light", "dark");
-    root.classList.add(resolved);
-    root.setAttribute("data-theme", resolved);
-  }, [resolveTheme]);
+    root.classList.add(currentTheme);
+    root.setAttribute("data-theme", currentTheme);
+  }, []);
 
   // Initialize: read from localStorage and apply theme
   useEffect(() => {
     const stored = localStorage.getItem("theme");
-    let initialTheme: Theme = "system";
+    let initialTheme: Theme = "dark";
     
-    if (stored === "system" || stored === "dark" || stored === "light") {
+    if (stored === "dark" || stored === "light") {
       initialTheme = stored as Theme;
     }
     
@@ -75,22 +49,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("theme", theme);
   }, [theme, applyTheme, mounted]);
 
-  // Listen for system theme changes when in system mode
-  useEffect(() => {
-    if (!mounted || theme !== "system") return;
-
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = () => {
-      applyTheme("system");
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, [theme, applyTheme, mounted]);
-
   const setTheme = useCallback((newTheme: Theme) => {
     setThemeState(newTheme);
   }, []);
+
+  // Resolved theme is the same as theme now (no system mode)
+  const resolvedTheme = theme;
 
   // Memoize context value
   const contextValue = useMemo(
