@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { ThemeScript } from "./components/ThemeScript";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import StructuredData from "./components/StructuredData";
 
 // Montserrat - For headers (variable font for all weights)
 const montserrat = localFont({
@@ -107,6 +110,7 @@ export default function RootLayout({
       <head>
         {/* DNS prefetch for external resources (GitHub API for potential future features) */}
         <link rel="dns-prefetch" href="https://api.github.com" />
+        <StructuredData />
       </head>
       <body
         className={`${montserrat.variable} ${roboto.variable} ${spaceMono.variable} antialiased`}
@@ -115,6 +119,8 @@ export default function RootLayout({
         <ThemeProvider>
           {children}
         </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
