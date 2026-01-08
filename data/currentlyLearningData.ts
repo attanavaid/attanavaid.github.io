@@ -27,6 +27,7 @@ export const currentlyLearningData: Skill[] = [
       { name: "Docker", logo: "/skills/tech/docker.svg" },
       { name: "AWS", logo: "/skills/tech/amazonaws.svg" },
       { name: "Kubernetes", logo: "/skills/tech/kubernetes.svg" },
+      { name: "Supabase", logo: "/skills/tech/supabase.svg" },
     ],
   },
   {
