@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+/docs
 
 # next.js
 /.next/
@@ -23,6 +24,15 @@
 # misc
 .DS_Store
 *.pem
+
+# LaTeX resume build
+.resume-build/
+resume.aux
+resume.log
+resume.out
+resume.fls
+resume.fdb_latexmk
+resume.synctex.gz
 
 # debug
 npm-debug.log*
