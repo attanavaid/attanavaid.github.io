@@ -74,6 +74,16 @@ pnpm dev
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+### Resume PDF
+
+The hero **Download Resume** button serves `public/resume.pdf`, built from `resume.tex` (Jake's Resume template). After editing the `.tex` file, compile locally (requires [TeX Live](https://tug.org/texlive/) or [MiKTeX](https://miktex.org/) with `pdflatex` on your PATH):
+
+```bash
+npm run resume:build
+```
+
+Commit `public/resume.pdf` when you want the live site to offer the updated file.
+
 ## 📧 Contact Form Setup
 
 The contact form uses EmailJS. To set it up:
