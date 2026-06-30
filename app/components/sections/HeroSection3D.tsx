@@ -529,24 +529,31 @@ export default function HeroSection3D({ currentRole, roles, scrollY }: HeroSecti
               Download Resume
             </a>
           </div>
-        </div>
-        
-        {/* Scroll indicator - responsive positioning */}
-        <div className={`absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 animate-bounce hidden sm:flex flex-col items-center gap-2 ${isDark ? 'text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]' : 'text-black drop-shadow-[0_2px_6px_rgba(255,255,255,0.8)]'}`}>
-          <span className="text-xs uppercase tracking-wider">Scroll</span>
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+
+          {/* Scroll indicator — in flow below CTA so it never overlaps buttons */}
+          <div
+            className={`hidden sm:flex flex-col items-center gap-2 pt-4 sm:pt-6 animate-bounce pointer-events-none ${
+              isDark
+                ? 'text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]'
+                : 'text-black drop-shadow-[0_2px_6px_rgba(255,255,255,0.8)]'
+            }`}
+            aria-hidden="true"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
+            <span className="text-xs uppercase tracking-wider">Scroll</span>
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+              />
+            </svg>
+          </div>
         </div>
       </div>
     </section>
