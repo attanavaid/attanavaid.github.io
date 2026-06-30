@@ -41,7 +41,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-4xl max-h-[90vh] flex flex-col bg-white dark:bg-black border-2 border-gray-300 dark:border-gray-700 rounded-lg shadow-2xl overflow-hidden"
+        className="relative w-full max-w-4xl max-h-[90vh] min-h-0 flex flex-col bg-white dark:bg-black border-2 border-gray-300 dark:border-gray-700 rounded-lg shadow-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -53,156 +53,160 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
           <X className="w-5 h-5 text-black dark:text-white" />
         </button>
 
-        {/* Project Image/Video */}
-        <div className="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden bg-gray-100 dark:bg-gray-900 shrink-0">
-          {isVideoFile(project.image) ? (
-            <>
-              {/* Blurred background for video */}
-              <div className="absolute inset-0">
-                <video
-                  src={project.image}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="auto"
-                  className="w-full h-full object-cover blur-2xl scale-110 opacity-50"
-                  aria-hidden="true"
-                />
-              </div>
-              {/* Main video */}
-              <div className="relative w-full h-full">
-                <video
-                  src={project.image}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="auto"
-                  className="w-full h-full object-contain"
-                  aria-label={`${project.title} video`}
-                />
-              </div>
-            </>
-          ) : (
-            <>
-              {/* Blurred background */}
-              <div className="absolute inset-0">
-                <Image
-                  src={project.image}
-                  alt=""
-                  fill
-                  className="object-cover blur-2xl scale-110 opacity-50"
-                  aria-hidden="true"
-                />
-              </div>
-              {/* Main image */}
-              <div className="relative w-full h-full">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-contain"
-                />
-              </div>
-            </>
-          )}
-        </div>
-
-        {/* Project Content - Scrollable */}
-        <div className="flex-1 overflow-y-auto p-6 sm:p-8 custom-scrollbar">
-          {/* Title */}
-          <h2 className="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-4 pr-12">
-            {project.title}
-          </h2>
-
-          {/* Full Description */}
-          <div className="mb-6">
-            <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed">
-              {project.description}
-            </p>
+        <div className="flex flex-col lg:flex-row flex-1 min-h-0 overflow-hidden">
+          {/* Project Image/Video — viewport-relative on mobile, side panel on large screens */}
+          <div className="relative w-full lg:w-[44%] xl:w-[42%] shrink-0 overflow-hidden bg-gray-100 dark:bg-gray-900 h-[clamp(8rem,26vh,12rem)] sm:h-[clamp(9rem,28vh,13rem)] lg:h-auto lg:min-h-0 lg:max-h-none border-b lg:border-b-0 lg:border-r border-gray-200 dark:border-gray-800">
+            {isVideoFile(project.image) ? (
+              <>
+                {/* Blurred background for video */}
+                <div className="absolute inset-0">
+                  <video
+                    src={project.image}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    className="w-full h-full object-cover blur-2xl scale-110 opacity-50"
+                    aria-hidden="true"
+                  />
+                </div>
+                {/* Main video */}
+                <div className="relative w-full h-full">
+                  <video
+                    src={project.image}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    className="w-full h-full object-contain"
+                    aria-label={`${project.title} video`}
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                {/* Blurred background */}
+                <div className="absolute inset-0">
+                  <Image
+                    src={project.image}
+                    alt=""
+                    fill
+                    className="object-cover blur-2xl scale-110 opacity-50"
+                    aria-hidden="true"
+                  />
+                </div>
+                {/* Main image */}
+                <div className="relative w-full h-full">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </>
+            )}
           </div>
 
-          {/* Full Tech Stack */}
-          <div className="mb-6">
-            <h3 className="text-xl font-bold text-black dark:text-white mb-3">
-              Tech Stack
-            </h3>
-            <div className="flex flex-wrap gap-2.5">
-              {project.tags.map((tag, tagIndex) => (
-                <span
-                  key={tagIndex}
-                  className="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 rounded-lg border border-gray-200 dark:border-gray-800"
+          {/* Project Content + Links */}
+          <div className="flex flex-col flex-1 min-h-0 min-w-0">
+            <div className="flex-1 min-h-0 overflow-y-auto p-5 sm:p-6 lg:p-7 custom-scrollbar">
+              {/* Title */}
+              <h2 className="text-2xl sm:text-3xl lg:text-3xl font-bold text-black dark:text-white mb-3 sm:mb-4 pr-12">
+                {project.title}
+              </h2>
+
+              {/* Full Description */}
+              <div className="mb-5 sm:mb-6">
+                <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base leading-relaxed">
+                  {project.description}
+                </p>
+              </div>
+
+              {/* Full Tech Stack */}
+              <div className="mb-2 sm:mb-4">
+                <h3 className="text-lg sm:text-xl font-bold text-black dark:text-white mb-3">
+                  Tech Stack
+                </h3>
+                <div className="flex flex-wrap gap-2.5">
+                  {project.tags.map((tag, tagIndex) => (
+                    <span
+                      key={tagIndex}
+                      className="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 rounded-lg border border-gray-200 dark:border-gray-800"
+                    >
+                      {tag.logo && (
+                        <div className="relative w-6 h-6 shrink-0">
+                          <Image
+                            src={`/skills/tech/${tag.logo}`}
+                            alt={tag.name}
+                            fill
+                            className="object-contain tech-logo"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                            }}
+                          />
+                        </div>
+                      )}
+                      <span>{tag.name}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Links - Fixed at bottom of content column */}
+            <div className="flex flex-wrap gap-3 justify-center sm:justify-start pt-4 px-5 sm:px-6 lg:px-7 pb-5 sm:pb-6 lg:pb-7 border-t border-gray-200 dark:border-gray-800 shrink-0 bg-white dark:bg-black">
+              {project.website && (
+                <a
+                  href={project.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-black text-black dark:text-white hover:border-black dark:hover:border-white hover:bg-gray-50 dark:hover:bg-gray-950 transition-all duration-300"
                 >
-                  {tag.logo && (
-                    <div className="relative w-6 h-6 shrink-0">
-                      <Image
-                        src={`/skills/tech/${tag.logo}`}
-                        alt={tag.name}
-                        fill
-                        className="object-contain tech-logo"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                        }}
-                      />
-                    </div>
-                  )}
-                  <span>{tag.name}</span>
-                </span>
-              ))}
+                  <ExternalLink className="w-4 h-4" />
+                  <span>Live Demo</span>
+                </a>
+              )}
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-black text-gray-600 dark:text-gray-400 hover:border-gray-600 dark:hover:border-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-950 transition-all duration-300"
+                >
+                  <div className="relative w-4 h-4">
+                    <Image
+                      src={commonImages.githubLogo}
+                      alt="GitHub"
+                      fill
+                      className="object-contain tech-logo"
+                    />
+                  </div>
+                  <span>GitHub</span>
+                </a>
+              )}
+              {project.video && (
+                <a
+                  href={project.video}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-black text-red-600 dark:text-red-400 hover:border-red-600 dark:hover:border-red-400 hover:text-red-700 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-950/20 transition-all duration-300"
+                >
+                  <div className="relative w-4 h-4">
+                    <Image
+                      src={commonImages.youtubeLogo}
+                      alt="YouTube"
+                      fill
+                      className="object-contain tech-logo"
+                    />
+                  </div>
+                  <span>YouTube</span>
+                </a>
+              )}
             </div>
           </div>
-        </div>
-
-        {/* Links - Fixed at bottom, not scrollable */}
-        <div className="flex flex-wrap gap-3 justify-center sm:justify-start pt-4 px-6 sm:px-8 pb-6 sm:pb-8 border-t border-gray-200 dark:border-gray-800 shrink-0 bg-white dark:bg-black">
-          {project.website && (
-            <a
-              href={project.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-black text-black dark:text-white hover:border-black dark:hover:border-white hover:bg-gray-50 dark:hover:bg-gray-950 transition-all duration-300"
-            >
-              <ExternalLink className="w-4 h-4" />
-              <span>Live Demo</span>
-            </a>
-          )}
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-black text-gray-600 dark:text-gray-400 hover:border-gray-600 dark:hover:border-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-950 transition-all duration-300"
-            >
-              <div className="relative w-4 h-4">
-                <Image
-                  src={commonImages.githubLogo}
-                  alt="GitHub"
-                  fill
-                  className="object-contain tech-logo"
-                />
-              </div>
-              <span>GitHub</span>
-            </a>
-          )}
-          {project.video && (
-            <a
-              href={project.video}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-black text-red-600 dark:text-red-400 hover:border-red-600 dark:hover:border-red-400 hover:text-red-700 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-950/20 transition-all duration-300"
-            >
-              <div className="relative w-4 h-4">
-                <Image
-                  src={commonImages.youtubeLogo}
-                  alt="YouTube"
-                  fill
-                  className="object-contain tech-logo"
-                />
-              </div>
-              <span>YouTube</span>
-            </a>
-          )}
         </div>
       </div>
     </div>
