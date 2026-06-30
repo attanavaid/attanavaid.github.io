@@ -1,5 +1,5 @@
 /**
- * Compile resume.tex → public/resume.pdf for the site download button.
+ * Compile resume.tex → public/Atta_Navaid_Resume.pdf for the site download button.
  * Requires a LaTeX distribution with pdflatex (TeX Live, MiKTeX, etc.).
  *
  * Usage: npm run resume:build
@@ -21,7 +21,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const texPath = join(root, "resume.tex");
 const buildDir = join(root, ".resume-build");
 const builtPdf = join(buildDir, "resume.pdf");
-const publicPdf = join(root, "public", "resume.pdf");
+const publicPdf = join(root, "public", "Atta_Navaid_Resume.pdf");
 
 function fail(message) {
   console.error(`\nresume:build — ${message}\n`);
@@ -94,4 +94,4 @@ for (const name of readdirSync(buildDir)) {
 }
 rmSync(buildDir, { recursive: true, force: true });
 
-console.log("Done. Refresh the site to test /resume.pdf\n");
+console.log("Done. Refresh the site to test /Atta_Navaid_Resume.pdf\n");
