@@ -76,13 +76,13 @@ pnpm dev
 
 ### Resume PDF
 
-The hero **Download Resume** button serves `public/resume.pdf`, built from `resume.tex` (Jake's Resume template). After editing the `.tex` file, compile locally (requires [TeX Live](https://tug.org/texlive/) or [MiKTeX](https://miktex.org/) with `pdflatex` on your PATH):
+The hero **Download Resume** button serves `public/Atta_Navaid_Resume.pdf`, built from `resume.tex` (Jake's Resume template). After editing the `.tex` file, compile locally (requires [TeX Live](https://tug.org/texlive/) or [MiKTeX](https://miktex.org/) with `pdflatex` on your PATH):
 
 ```bash
 npm run resume:build
 ```
 
-Commit `public/resume.pdf` when you want the live site to offer the updated file.
+Commit `public/Atta_Navaid_Resume.pdf` when you want the live site to offer the updated file.
 
 ## 📧 Contact Form Setup
 
