@@ -18,7 +18,7 @@ export const projectsData: Project[] = [
     website: "https://www.rivals-compendium.com/",
   },
   {
-    image: "/projects/3d-armory.jpg",
+    image: "/projects/3d-Armory.webm",
     title: "Fantasy Armory",
     description:
       "Interactive 3D weapon gallery built with Next.js and React Three Fiber. Browse PBR glTF models on auto-rotating turntables with a virtualized carousel, open an inspect view with orbit controls and weapon stats, and switch between light and dark themes with matching scene lighting. Manifest-driven content pipeline lets new weapons ship from a single config entry. Optimized GLB assets (~71% size reduction), staged preloading, and long-cache static delivery for smoother WebGL performance. Deployed on Vercel.",
